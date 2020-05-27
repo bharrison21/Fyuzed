@@ -16,6 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from users import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
+    #this could be the user's home page
+    path('home/', views.home, name="home"),
+    #default page that the site opens to 
+    path('', views.login, name="login"),
 ]

@@ -56,7 +56,10 @@ ROOT_URLCONF = 'student_app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            #establishes directory to look for templates
+            os.path.join(BASE_DIR, 'templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,5 +125,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-
+#written by user, authorizes the custom user class (i think)
 AUTH_USER_MODEL = 'users.CustomUser'

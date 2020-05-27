@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-
 from .models import CustomUser
 
+from django import forms
 
 class CustomUserCreationForm(UserCreationForm):
 
@@ -15,3 +15,7 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
         fields = ('email',)
+
+
+class NameForm(forms.Form):
+    your_name = forms.CharField(label='Your name', max_length=100)

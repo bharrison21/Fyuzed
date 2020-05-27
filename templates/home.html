@@ -1,0 +1,13 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+        <h2>Home</h2>
+    </head>
+    <body>
+        <div>
+            <h4>User home page</h4>
+            {% csrf_token %}
+            <p>Hello, {{ form.your_name.value }}, how are you?</p>
+        </div>
+    </body>
+</html>

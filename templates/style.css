@@ -1,0 +1,64 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.header {
+    height: 90px;
+    width: 100%;
+    background: #feb657;  
+}
+
+.masthead {
+    position: absolute;
+    width: 250px;
+    height: 110px;
+    left: 0%;
+    padding-top: 0px;
+}
+.motto {
+    display: flex;
+    position: absolute;
+    font-family: Playfair;
+    left: 50%;
+    top: 57px;
+    color: #3D348B;
+}
+.login_form {
+    display: flex;
+    position: absolute;
+    left: 75%;
+    top: 50px;
+}
+
+section {
+    height: 1000px;
+    width: 100%;
+    top: 800px;
+    background: black;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.page {
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    
+}
+.vr {
+    width:2px;
+    background-color:#ffffff;
+    position:absolute;
+    top:50%;
+    height: 500px;
+    margin-left: 50%;
+}
+.text {
+    margin-top: 18%;
+    color: white;
+    left: 10%;
+    font-size: medium;
+    font-family: Playfair;
+    right: 55%;
+    word-wrap: break-word;
+    max-width: 522px;
+}

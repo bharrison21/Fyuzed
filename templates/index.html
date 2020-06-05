@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fyuze login or signup</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+    <nav class="header">
+        <img class="masthead" src="head.png.PNG" alt="masthead">
+
+        <div class="motto">
+            <div class="font"><b>Let's Peak.</b></div>
+        </div>
+
+        <form class="login_form">
+            <action="" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Submit">
+        </form>
+    </nav>
+
+    <section>
+        <div class="vr">&nbsp;</div>   
+        <div class="page">
+            <div class="summary"></div>
+            <p class="text"> 
+                Fyuzed is the number one social media platform about college life for college students. Why Fyuzed? Because the stress of scrolling through a group chat to find that one note about that business fratenity you forgot the name of is gone. Whether it's coordinating class schedules, learning about greeklife, or humurous bantering, Fyuzed has it all. Lets make sure college really is your peak. 
+            </p>
+        </div>
+    </section>
+</body>
+
+</html>

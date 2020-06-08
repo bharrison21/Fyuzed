@@ -47,7 +47,7 @@ section {
     height: 700px;
     width: 100%;
     top: 90px;
-    background:#C8C4E9;
+    background: white;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
@@ -59,7 +59,7 @@ section {
 }
 .vr {
     width:2px;
-    background-color:#ffffff;
+    background-color:#918AD4;
     position:absolute;
     top:30%;
     height: 400px;
@@ -85,7 +85,7 @@ section {
 
 .signup .account {
     font-size: 30px;
-    color: rgb(0, 0, 0);
+    color: #918AD4;
     margin: 15px 5px;
 }
 .signup .signup-form input{
@@ -112,7 +112,7 @@ section {
     top:762px;
     position: absolute;
     bottom: 0px;
-    background: #E4E2F4;
+    background: white;
 }
 .bottom .quote {
     color: black;

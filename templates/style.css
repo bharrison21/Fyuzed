@@ -3,39 +3,52 @@
     padding: 0;
 }
 .header {
-    height: 90px;
+    height: 90px; 
     width: 100%;
-    background: #feb657;  
+    background: #918AD4;  
 }
 
 .masthead {
     position: absolute;
-    width: 250px;
-    height: 110px;
+    max-width: 25%;
+    height: auto;
+    top: 5px;
     left: 0%;
     padding-top: 0px;
-}
-.motto {
-    display: flex;
-    position: absolute;
-    font-family: Playfair;
-    left: 50%;
-    top: 57px;
-    color: #3D348B;
 }
 .login_form {
     display: flex;
     position: absolute;
     left: 75%;
     top: 50px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.login_form .username,
+.login_form .password {
+    color: rgb(0, 0, 0);
+    padding-bottom: 10px;
+    position: relative;
+    margin-top: -10px;
+    top: -38px;
+}
+
+.submit {
+    height: 25px;
+    width: 50px;
+    font-weight: 500;
+    right: -73px;
+    top: -9px;
+    position: absolute;
+    background: #c8c4e9;
+    border: 1px solid black;
 }
 
 section {
-    height: 1000px;
+    height: 700px;
     width: 100%;
-    top: 800px;
-    background: black;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    top: 90px;
+    background: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .page {
@@ -46,19 +59,65 @@ section {
 }
 .vr {
     width:2px;
-    background-color:#ffffff;
+    background-color:#918AD4;
     position:absolute;
-    top:50%;
-    height: 500px;
+    top:30%;
+    height: 400px;
     margin-left: 50%;
 }
 .text {
     margin-top: 18%;
-    color: white;
+    color: black;
     left: 10%;
     font-size: medium;
-    font-family: Playfair;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     right: 55%;
     word-wrap: break-word;
     max-width: 522px;
+    line-height: 25px;
 }
+.signup{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    position: absolute;
+    left: 65%;
+    top: 30%;
+}
+
+.signup .account {
+    font-size: 30px;
+    color: #918AD4;
+    margin: 15px 5px;
+}
+.signup .signup-form input{
+    margin-top: 50px;
+    font-size: 15px;
+    height: 24px;
+    width: 165px;
+    border: 1px solid black;
+    border-radius: 3px;
+    margin-right: 10px;
+}
+.signup .signup-form .lastname {
+    margin-left: 15px;
+}
+.signup .signup-form .email,
+.signup .signup-form .password,
+.signup .signup-form .password1 {
+    margin-top: 20px;
+    width: 400px;
+}
+.bottom {
+    width: 100%;
+    height:118px;
+    top:762px;
+    position: absolute;
+    bottom: 0px;
+    background: white;
+}
+.bottom .quote {
+    color: black;
+    text-align: center ;
+    font-size: x-large;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    word-wrap: break-word;
+    line-height: 25px;}

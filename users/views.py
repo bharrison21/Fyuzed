@@ -8,14 +8,18 @@ from django.shortcuts import render
 from .forms import NameForm, CustomUserCreationForm
 from .managers import CustomUserManager
 
-
-def home(request):
-    return HttpResponse("Alright alright alright")
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     return render(request, 'index.html')
 
-def login(request):
+def home(request):
+    #might need to use sessions, after the user is logged in, to carry over their data to this point
+    return render(request, 'home.html')
+
+""" 
+def login_view(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
         if form.is_valid: 
@@ -23,23 +27,26 @@ def login(request):
     else :
         form = CustomUserCreationForm()
 
-    return render(request, 'login.html', {'form' : form})
-
+    return render(request, 'registration/login.html', {'form' : form}) """
 
 
 def register(request): 
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
         if form.is_valid: 
-            #nice
-            CUM = CustomUserManager()
-            CUM.create_user(form.email, form.password1)
-            return render(request, 'home.html', {'form' : form})
+            #imported from managers.py
+            CustomUserManager().create_user(form.email, form.password1)
+            user = authenticate(request, username=form.email, password=form.password1)
+            if user is not None: 
+                login(request, user)
+                return render(request, 'home.html', {'form' : form})
+            else:
+                return HttpResponse("Invalid login")
+
     else :
         form = CustomUserCreationForm()
 
-    return render(request, 'register.html', {'form' : form})
-
+    return render(request, 'registration/register.html', {'form' : form})
 
 
 
@@ -56,11 +63,11 @@ def get_name(request):
             return render(request, 'home.html', {'form': form})
         else:
             form = NameForm()
-            return render(request, 'login.html', {'form': form})
+            return render(request, 'registration/login.html', {'form': form})
 
     # if a GET (or any other method) we'll create a blank form
     else:
         form = NameForm()
-        return render(request, 'login.html', {'form': form})
+        return render(request, 'registration/login.html', {'form': form})
 
     

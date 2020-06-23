@@ -131,3 +131,6 @@ STATIC_URL = '/static/'
 
 #written by user, authorizes the custom user class (i think)
 AUTH_USER_MODEL = 'users.CustomUser'
+
+#after login, it redirects to home
+LOGIN_REDIRECT_URL = 'home'

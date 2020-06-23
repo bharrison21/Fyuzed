@@ -8,10 +8,10 @@
             <p>User login page</p>
         </div>
         <div>
-            <form action="/home/" method="post">
+            <form method="post">
                 {% csrf_token %}
-                {{ form }}
-                <input type="submit" value="Submit">
+                {{ form.as_p }}
+                <input type="submit" value="Login">
             </form>
         </div>
     </body>

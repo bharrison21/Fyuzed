@@ -7,7 +7,7 @@ class CustomUserCreationForm(UserCreationForm):
 
     class Meta(UserCreationForm):
         model = CustomUser
-        fields = ('email', )
+        fields = ('email',)
     
     email = forms.EmailField(label="Your email")
     #password = forms.PasswordInput()
@@ -18,6 +18,7 @@ class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
         fields = ('email',)
+
 
 
 class NameForm(forms.Form):

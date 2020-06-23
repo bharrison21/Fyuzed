@@ -25,7 +25,11 @@ SECRET_KEY = 'xvb%hm_vl3#-fblv89-&19*5e09g0j(a%(j@(3jkf7+o(y-hl+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    #lightsail instance 1
+    '34.226.200.228',
+    '127.0.0.1'
+    ]
 
 
 # Application definition

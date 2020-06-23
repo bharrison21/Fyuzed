@@ -23,10 +23,13 @@ urlpatterns = [
 
     #this could be the user's home page
     path('home/', views.home, name="home"),
-    #default page that the site opens to 
-    #    path('', views.login, name="login"),
-
 
     #test form page
-    path('', views.get_name, name="login")
+    path('', views.index, name="index"),
+
+    #user login page
+    path('login/', views.login, name="login"),
+
+    #user registration page
+    path('register/', views.register, name="register"),
 ]

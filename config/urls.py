@@ -1,4 +1,4 @@
-"""student_app URL Configuration
+"""config URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
@@ -15,21 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
-from users import views
+from django.views.generic.base import TemplateView
 
 urlpatterns = [
+    path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('admin/', admin.site.urls),
-
-    #this could be the user's home page
-    path('home/', views.home, name="home"),
-
-    #test form page
-    path('', views.index, name="index"),
-
-    #user login page
-    #path('login/', views.login_view, name="login"),
-
-    #user registration page
-    path('register/', views.register, name="register"),
+    path('users/', include('users.urls')),
+    path('users/', include('django.contrib.auth.urls')),
 ]

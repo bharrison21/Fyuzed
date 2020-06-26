@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    #this is for the users app 
     'users.apps.UsersConfig',
 ]
 
@@ -56,6 +57,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        #this routes to the templates folder
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -122,7 +124,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-AUTH_USER_MODEL = 'users.CustomUser'
 
+#allows CustomUser to be used
+AUTH_USER_MODEL = 'users.CustomUser'
+#tell where to redirect after the login/logout, uses some built in functionality that idk anything about
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'

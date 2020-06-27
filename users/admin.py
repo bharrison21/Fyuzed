@@ -10,6 +10,8 @@ class CustomUserAdmin(UserAdmin):
     form = CustomUserChangeForm
     model = CustomUser
 
+    # prepopulated_fields = {'slug': ('username',)}
+
     #this is what will be displayed when you go to <url>/admin
     list_display = ['username', 'email', 'is_superuser']
 

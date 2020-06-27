@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+    <h2>{{ object.username }} Profile Page</h2>
+
+    <div>
+        <p>Username: {{ object.username }}</p>
+        <p>Email: {{ object.email }}</p>
+        <p>Is super user: {{ object.is_superuser }}</p>
+        <p>Is active account: {{ object.is_active }}</p>
+    </div>
+
+    <p><a href="{% url 'home' %}">Home</a></p>
+
+
+{% endblock %}

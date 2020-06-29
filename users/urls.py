@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import SignUpView, RegisteredUsersList, ProfileView
+from .views import SignUpView, RegisteredUsersList, ProfileView, ProfileUpdate
 
 #define paths. 
 #       When you are at '<url>/signup/', it will show SignUpView (as_view needed bc its class based)
@@ -10,4 +10,5 @@ urlpatterns = [
     path('signup/', SignUpView.as_view(), name='signup'),
     path('userlist/', RegisteredUsersList.as_view(), name='userlist'),
     path('profile/<slug:the_slug>/', ProfileView.as_view(), name='profile'),
+    path('profile/<slug:the_slug>/edituser', ProfileUpdate.as_view(), name='edituser'),
 ]

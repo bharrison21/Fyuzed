@@ -11,8 +11,10 @@
         <p>Is super user: {{ object.is_superuser }}</p>
         <p>Is active account: {{ object.is_active }}</p>
     </div>
-
-    <p><a href="{% url 'home' %}">Home</a></p>
-
+    <br>
+    <div>
+        <p><a href="{% url 'edituser' object.slug %}">Edit Profile</a></p>
+        <p><a href="{% url 'home' %}">Home</a></p>
+    </div>
 
 {% endblock %}

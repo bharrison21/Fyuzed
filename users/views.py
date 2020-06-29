@@ -1,8 +1,9 @@
-from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy, reverse
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView, DetailView
+from django.http import HttpResponse
 
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser
 
 from django.contrib.auth.decorators import login_required
@@ -27,7 +28,7 @@ class RegisteredUsersList(ListView):
 
 
 
-# @method_decorator(login_required, name='get_context_data') <--( this should prob be here but was causing problems )
+# @method_decorator(login_required, name='get_context_data') #<--( this should prob be here but was causing problems )
 class ProfileView(DetailView):
     model = CustomUser
     template_name = 'profile.html'
@@ -40,3 +41,31 @@ class ProfileView(DetailView):
         context = super().get_context_data(**kwargs)
         #context['now'] = timezone.now()
         return context
+
+
+
+class ProfileUpdate(UpdateView):
+    model = CustomUser
+    #fields = ['username',]
+    form_class = CustomUserChangeForm
+    template_name= "customuser_update_form.html"
+    slug_url_kwarg = 'the_slug'
+    slug_field = 'slug'
+
+    success_url = reverse_lazy("home")
+    
+    # def post(self, request, the_slug):
+    #     self.object = self.get_object()
+    #     context = self.get_context_data(object=self.object)
+    #     return render(request, 'profile', {'slug': 'the_slug'})
+    
+
+
+
+# def update_profile(request):
+#     if request.method == "POST":
+#         request.slug_url_kwarg = 'the_slug'
+#         request.slug_field = 'slug'
+#         user = request.object
+#         user.username = request.new_username
+#         return render(request, 'profile')

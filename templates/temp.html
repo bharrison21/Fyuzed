@@ -6,7 +6,7 @@
 <h2>Temp: Registered Users</h2>
 <ul>
     {% for user in object_list %}
-        <li>{{ user.username }}</li>
+        <p><li>USERNAME: {{ user.username }}, EMAIL: {{ user.email }}</li></p>
     {% endfor %}
 </ul>
 {% endblock %}

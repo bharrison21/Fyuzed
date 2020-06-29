@@ -52,12 +52,9 @@ class ProfileUpdate(UpdateView):
     slug_url_kwarg = 'the_slug'
     slug_field = 'slug'
 
-    success_url = reverse_lazy("home")
-    
-    # def post(self, request, the_slug):
-    #     self.object = self.get_object()
-    #     context = self.get_context_data(object=self.object)
-    #     return render(request, 'profile', {'slug': 'the_slug'})
+    #the url to go to next: 'profile/{slug}' --- self.object.slug gives updated username as slug
+    def get_success_url(self, **kwargs):         
+        return reverse_lazy("profile", args=(self.object.slug,))
     
 
 

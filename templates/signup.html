@@ -1,12 +1,60 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
 
-{% block title %}Sign Up{% endblock %}
 
-{% block content %}
-<h2>Sign up</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Sign up</button>
-</form>
-{% endblock %}
+<head>
+    <title>Fyuze login or signup</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head> 
+<body>
+
+
+    <nav class="header">
+        <img class="masthead" src="orange.PNG" alt="masthead">
+
+        <form class="login_form">
+            <action="" method="post">
+            <div class="username">
+                <div class="log">Email or Username</div>
+                <input type="text" name="">
+            </div>
+            <div class="password">
+                <div class="log">Password</div>
+                <input type="password" name="">
+            </div>
+            <button class="submit" >Submit</button>
+        </form>
+    </nav>
+
+    
+    <section>
+        <div class="vr">&nbsp;</div>   
+        <div class="page">
+            <img class="logo" src="Logo.PNG" alt="logo">
+        </div>
+        <div class="signup">
+            <p class="account">Create an Account</p>
+            <form class="signup-form">
+                <div>
+                    <input class="firstname" type="text" name="" placeholder="First Name">
+                    <input class="lastname" type="text" name="" placeholder="Last Name">
+                    <input class="university" type="text" name="" placeholder="University">
+                    <input class="email" type="text" name="" placeholder="Email">
+                    <input class="password" type="password" name="" placeholder="Password">
+                    <input class="password1" type="password" name="" placeholder="Confirm Password">
+                </div>
+                <button class="signup-button">Sign Up</button>
+            <div class="signup">
+
+            
+            </form>
+        </div>
+    </section>
+    <div class="bottom">
+        <p class="quote">
+        Beyond College 
+        </p>
+    </div>
+</body>
+
+</html>

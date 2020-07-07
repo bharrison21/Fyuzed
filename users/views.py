@@ -59,10 +59,5 @@ class ProfileUpdate(UpdateView):
 
 
 
-# def update_profile(request):
-#     if request.method == "POST":
-#         request.slug_url_kwarg = 'the_slug'
-#         request.slug_field = 'slug'
-#         user = request.object
-#         user.username = request.new_username
-#         return render(request, 'profile')
+#should probably add a delete account view
+

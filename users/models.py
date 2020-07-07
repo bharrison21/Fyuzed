@@ -5,7 +5,9 @@ from django.urls import reverse
 
 
 class CustomUser(AbstractUser):
-    #can define custom fields for the model (beyond what AbstractUser comes with)
+    #slug (and pk) allow custom urls for different users, groups, etc. -- slugs make the custom url more
+    #       easily searchable through search engines because they are words, whereas pk's are numerical,
+    #       both can be used together to make an even wider range of custom urls
     slug = models.SlugField(unique=True, default="user_account_outdated")
 
 #some fields that I plan on adding to CustomUser

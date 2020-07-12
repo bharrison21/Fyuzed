@@ -3,6 +3,7 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
+{% csrf_token %}
     <h2> {{ object.username }}'s Profile Page</h2>
 
     <div>

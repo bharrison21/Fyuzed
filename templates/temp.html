@@ -5,6 +5,7 @@
 {% block content %}
 <h2>Temp: Registered Users</h2>
 <ul>
+    {% csrf_token %}
     {% for user in object_list %}
         <p><li>USERNAME: {{ user.username }}, EMAIL: {{ user.email }}</li></p>
     {% endfor %}

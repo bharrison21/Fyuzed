@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}List of Groups{% endblock %}
+
+{% block content %}
+<h2>Temp: Groups</h2>
+<ul>
+    {% csrf_token %}
+    {% for group in object_list %}
+        <p><li>Group name: {{ group.name }}</li></p>
+    {% endfor %}
+</ul>
+{% endblock %}

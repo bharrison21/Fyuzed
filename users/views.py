@@ -8,6 +8,7 @@ from .models import CustomUser
 
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+
 from django.shortcuts import render
 
 #this type of view is called a Class-based view, so it can use form_class, success_url, and template_name
@@ -17,6 +18,8 @@ class SignUpView(CreateView):
     success_url = reverse_lazy('login')
     template_name = 'signup.html'
     #can create member methods (also can apply method decorators)
+
+
 
 class RegisteredUsersList(ListView):
     model = CustomUser

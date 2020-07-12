@@ -40,6 +40,8 @@ INSTALLED_APPS = [
 
     #this is for the users app 
     'users.apps.UsersConfig',
+    #groups app
+    'group.apps.GroupConfig',
 ]
 
 MIDDLEWARE = [

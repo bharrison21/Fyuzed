@@ -3,6 +3,8 @@ from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
 
+#from community.models import Organization
+
 
 class CustomUser(AbstractUser):
     #slug (and pk) allow custom urls for different users, groups, etc. -- slugs make the custom url more
@@ -18,6 +20,10 @@ class CustomUser(AbstractUser):
     # profile_picture = models.ImageField()
     # #type=model relationship; one user relationship to many other users
     # friend_list = models.ManyToOneRel()
+    # #also need to create a list of all the groups a user is a member of
+
+    #list of all the groups a user is in
+    #group_list = models.ManyToManyField(Organization)
 
 
 
@@ -25,6 +31,7 @@ class CustomUser(AbstractUser):
 
     #overridden to include slug
     def save(self, *args, **kwargs):
+        #slugify gets rid of spaces, makes it all lowercase, etc.
         self.slug = slugify(self.username)
         super().save(*args, **kwargs)
 

@@ -1,13 +1,16 @@
 from django.db import models
 from users.models import CustomUser
-
+from django.utils.text import slugify
 
 
 class Group(models.Model):
-    name = models.CharField(max_length=30, unique=True)
-    description = models.CharField(max_length=100)
+    name = models.CharField(max_length=50, unique=True)
+    description = models.CharField(max_length=200)
+    # assigns this at the time of the model's creation
     created_at = models.DateTimeField(auto_now=True)
     
+    slug = models.SlugField(unique=True, default="group_outdated")
+
     members = models.ManyToManyField(
         CustomUser, 
         through="Membership", 
@@ -15,10 +18,14 @@ class Group(models.Model):
         through_fields=('group', 'person')
         ) 
     
-    
+    def save(self, *args, **kwargs):
+        #slugify gets rid of spaces, makes it all lowercase, etc.
+        self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
 
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 
 
@@ -28,13 +35,13 @@ class Group(models.Model):
 class Membership(models.Model):
     person = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
-    date_joined = models.DateField()
-    invite_reason = models.CharField(max_length=64)
+    date_joined = models.DateField(auto_now=True)
+    # invite_reason = models.CharField(max_length=64)
 
 
 
     def __str__(self):
-        return self.person
+        return str(self.person)
 
 
 
@@ -46,7 +53,9 @@ class Membership(models.Model):
 
 #a discussion board with a topic and which members of the group can add posts to
 class Board(models.Model):
-    subject = models.CharField(max_length=255)
+    topic = models.CharField(max_length=255)
+    description = models.CharField(max_length=1000, default='boardy_mc_boardface')
+    
     last_updated = models.DateTimeField(auto_now_add=True)
 
     group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='topics')
@@ -55,7 +64,7 @@ class Board(models.Model):
 
 
     def __str__(self):
-        return self.subject
+        return str(self.topic)
 
 
 
@@ -74,4 +83,4 @@ class Post(models.Model):
 
 
     def __str__(self):
-        return self.created_by + self.created_at
+        return str(self.created_by + self.created_at)

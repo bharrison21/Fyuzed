@@ -1,22 +1,26 @@
 from django import forms
-from .models import Group
+from .models import Group, Board, Post
 
 
 
 class GroupCreationForm(forms.ModelForm):
     class Meta:
         model = Group
-        fields = ('name', 'description')
-        
+        fields = ('name', 'description',)
+
     # name = forms.CharField(label='Group Name', max_length=100)
     # description = forms.CharField(label='Group Description', max_length=400)
 
 
 
-class BoardCreationForm(forms.Form):
-    name = forms.CharField(label='Board Name', max_length=100)
+class BoardCreationForm(forms.ModelForm):
+    class Meta:
+        model = Board
+        fields = ('topic', 'description',)
 
 
 
-class PostCreationForm(forms.Form):
-    content = forms.CharField(label='Board Name', max_length=1000)
+class PostCreationForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ('content',)

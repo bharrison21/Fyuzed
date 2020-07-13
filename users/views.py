@@ -23,7 +23,7 @@ class SignUpView(CreateView):
 
 class RegisteredUsersList(ListView):
     model = CustomUser
-    template_name = 'temp.html'
+    template_name = 'user_list.html'
 
 #define other views here, they can also be a function-based view
 # Example:        # def example_view(request):

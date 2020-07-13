@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import GroupList, CreateGroup
+from .views import GroupList, CreateGroup, ViewGroup
+from . import views
 from django.views.generic.base import TemplateView
 
 #define paths. 
@@ -11,4 +12,6 @@ urlpatterns = [
     path('grouplist/', GroupList.as_view(), name="grouplist"),
     path('grouphome/', TemplateView.as_view(template_name='groups_home.html'), name="grouphome"),
     path('creategroup/', CreateGroup.as_view(), name="creategroup"),
+    path('viewgroup/<slug:the_slug>/', ViewGroup.as_view(), name="viewgroup"),
+    path('viewgroup/<slug:the_slug>/joingroup', views.join_group, name="joingroup"),
 ]

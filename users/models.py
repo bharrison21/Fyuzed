@@ -18,9 +18,9 @@ class CustomUser(AbstractUser):
     # bio = models.TextField(max_length=500)
     # #this is probably gonna be a bitch to get working
     # profile_picture = models.ImageField()
+
     # #type=model relationship; one user relationship to many other users
-    # friend_list = models.ManyToOneRel()
-    # #also need to create a list of all the groups a user is a member of
+    friend_list = models.ManyToManyField('CustomUser')
 
     #list of all the groups a user is in
     #group_list = models.ManyToManyField(Organization)

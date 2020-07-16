@@ -14,6 +14,15 @@
     </div>
     <br>
     <div>
+        <p>List of groups:</p>
+        <ul>
+            {% for group in object.group_set.all %}
+            <li> {{ group.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <br>
+    <div>
         <p><a href="{% url 'edituser' object.slug %}">Edit Profile</a></p>
         <p><a href="{% url 'home' %}">Home</a></p>
     </div>

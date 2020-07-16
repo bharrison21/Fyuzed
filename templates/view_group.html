@@ -18,5 +18,10 @@
         {% csrf_token %}
         <input type='submit' value='join "{{ object.name }}" ?' />
     </form>
+    
+    <form method="POST" action="leavegroup" object="{{ object }}">
+        {% csrf_token %}
+        <input type='submit' value='leave "{{ object.name }}" ?' />
+    </form>
 
 {% endblock %}

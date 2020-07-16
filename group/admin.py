@@ -11,6 +11,6 @@ class CustomGroupAdmin(admin.ModelAdmin):
     # prepopulated_fields = {'slug': ('username',)}
 
     #this is what will be displayed when you go to <url>/admin
-    list_display = ['name', 'description', 'created_at']
+    list_display = ['name', 'description', 'created_at',]
 
 admin.site.register(Group, CustomGroupAdmin)

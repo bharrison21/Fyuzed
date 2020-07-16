@@ -41,25 +41,38 @@ class ViewGroup(DetailView):
 
 def join_group(request, the_slug):
     if request.method == "POST":
-    #need to check that user is not already in the group
-        user = request.user
-        #group = get_object_or_404(Group, slug = the_slug)
+        # gets the current group based on its slug
         group = Group.objects.get(slug = the_slug)
+        # gets the currently logged in user through request
+        user = request.user
+        # check that user is not already in the group
+        if not group.members.filter(slug = user.slug).exists():
 
-        #create new membership object and save it
-        membership = Membership(person=user, group=group)
-        membership.save()
+            #create new membership object and save it
+            membership = Membership(person=user, group=group)
+            membership.save()
 
-        #add that member to the group's member list
-        group.members.add(user,)
+            #add that member to the group's member list
+            group.members.add(user,)
         return render(request, 'groups_home.html')
 
 
+def leave_group(request, the_slug):
+    if request.method == "POST":
+        # gets the current group based on its slug
+        group = Group.objects.get(slug = the_slug)
+        # gets the currently logged in user through request
+        user = request.user
+        # check that user is not already in the group
+        if group.members.filter(slug = user.slug).exists():
+            group.members.remove(user,)
+            Membership.objects.filter(person = user).delete()
+            # delete the membership object that was used as a through field
+
+        return render(request, 'groups_home.html')
 
 
 # TODO:
-#     - add check so that the same person cannot join the group multiple times
-#     - add a choice to leave the group
 #     - make it possible to create boards & posts
 #     - create friends list 
 #     - make owner and admins for groups 

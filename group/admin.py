@@ -13,4 +13,16 @@ class CustomGroupAdmin(admin.ModelAdmin):
     #this is what will be displayed when you go to <url>/admin
     list_display = ['name', 'description', 'created_at',]
 
+
+class CustomBoardAdmin(admin.ModelAdmin):
+    add_form = BoardCreationForm
+    # form = #this needs to be the change form
+    model = Board
+
+    # prepopulated_fields = {'slug': ('username',)}
+
+    #this is what will be displayed when you go to <url>/admin
+    list_display = ['topic', 'description', 'last_updated',]
+
 admin.site.register(Group, CustomGroupAdmin)
+admin.site.register(Board, CustomBoardAdmin)

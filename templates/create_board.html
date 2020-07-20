@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Board{% endblock %}
+
+{% block content %}
+<h2>Create Board</h2>
+
+<form method="POST" action="{% url 'createboard' object %}" object ="{{ object }}">
+    {% csrf_token %}
+    <input type='submit' value='create board?' />
+</form>
+
+{% endblock %}

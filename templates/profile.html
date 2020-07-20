@@ -17,7 +17,7 @@
         <p>List of groups:</p>
         <ul>
             {% for group in object.group_set.all %}
-            <li> {{ group.name }}</li>
+            <li> {{ group.name }} <a href="{% url 'viewgroup' group.slug %}">View Group</a></li>
             {% endfor %}
         </ul>
     </div>

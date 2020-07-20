@@ -4,16 +4,25 @@
 
 {% block content %}
 <h2>Temp: Groups</h2>
+<div>
     <p>
         <p style="font-weight: bold;">Group name: {{ object.name }}</p>
         <p>Description: {{ object.description }}</p>
         <p>Created at: {{ object.created_at }}</p>
         <p>Member list: </p>
+        <ul>
         {% for member in object.members.all %}
-            <p> {{ member }}</p>
+            <li> {{ member }}</li>
         {% endfor %}
+        </ul>
     </p>
+</div>
 
+
+<div>
+    <!-- should figure out a way to only show these two buttons if relevant (third already does that)
+    meaning it won't ask you to join if you're in the group already and won't ask to leave
+    if you haven't joined the group yet -->
     <form method="POST" action="joingroup" object="{{ object }}">
         {% csrf_token %}
         <input type='submit' value='join "{{ object.name }}" ?' />
@@ -23,5 +32,33 @@
         {% csrf_token %}
         <input type='submit' value='leave "{{ object.name }}" ?' />
     </form>
+
+
+    {% if object.created_by == user %}
+    <form method="POST" action="deletegroup" object="{{ object }}">
+        {% csrf_token %}
+        <input type='submit' value='delete "{{ object.name }}" ?' />
+    </form>
+    {% endif %}
+</div>
+
+<p><a href="{% url 'grouphome' %}">Group Home</a></p>
+
+<br>
+
+<h3>Boards</h3>
+<form method="POST" action="{% url 'createboard' object.slug %}" object ="{{ object }}">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="id_subject">Subject</label>
+        <input type="text" class="form-control" id="id_subject" name="subject">
+    </div>
+    <div class="form-group">
+        <label for="id_message">Message</label>
+        <textarea class="form-control" id="id_message" name="message" rows="5"></textarea>
+    <input type='submit' value='create board?'/>
+</form>
+
+<!-- <p><a href="{% url 'createboard' object.slug %}" object="{{ object }}">Create Board</a></p> -->
 
 {% endblock %}

@@ -1,17 +1,18 @@
 {% extends 'base.html' %}
 
-{% block title %}Join group{% endblock %}
+{% block title %}View group{% endblock %}
 
 {% block content %}
-<h2>Temp: Groups</h2>
+<h2>Group</h2>
 <div>
     <p>
-        <p style="font-weight: bold;">Group name: {{ object.name }}</p>
-        <p>Description: {{ object.description }}</p>
-        <p>Created at: {{ object.created_at }}</p>
+        <p style="font-weight: bold;">Group name: {{ group.name }}</p>
+        <p>Description: {{ group.description }}</p>
+        <p>Created at: {{ group.created_at }}</p>
+        <p>Slug: {{ group.slug }}</p>
         <p>Member list: </p>
         <ul>
-        {% for member in object.members.all %}
+        {% for member in group.members.all %}
             <li> {{ member }}</li>
         {% endfor %}
         </ul>
@@ -20,24 +21,24 @@
 
 
 <div>
-    <!-- should figure out a way to only show these two buttons if relevant (third already does that)
-    meaning it won't ask you to join if you're in the group already and won't ask to leave
-    if you haven't joined the group yet -->
-    <form method="POST" action="joingroup" object="{{ object }}">
+    {% if not user in group.members.all %}
+    <form method="POST" action="joingroup" group="{{ group }}">
         {% csrf_token %}
-        <input type='submit' value='join "{{ object.name }}" ?' />
+        <input type='submit' value='join "{{ group.name }}" ?' />
     </form>
+    {% endif %}
     
-    <form method="POST" action="leavegroup" object="{{ object }}">
+    {% if user in group.members.all %}
+    <form method="POST" action="leavegroup" group="{{ group }}">
         {% csrf_token %}
-        <input type='submit' value='leave "{{ object.name }}" ?' />
+        <input type='submit' value='leave "{{ group.name }}" ?' />
     </form>
+    {% endif %}
 
-
-    {% if object.created_by == user %}
-    <form method="POST" action="deletegroup" object="{{ object }}">
+    {% if group.created_by == user %}
+    <form method="POST" action="deletegroup" group="{{ group }}">
         {% csrf_token %}
-        <input type='submit' value='delete "{{ object.name }}" ?' />
+        <input type='submit' value='delete "{{ group.name }}" ?' />
     </form>
     {% endif %}
 </div>
@@ -47,18 +48,11 @@
 <br>
 
 <h3>Boards</h3>
-<form method="POST" action="{% url 'createboard' object.slug %}" object ="{{ object }}">
-    {% csrf_token %}
-    <div class="form-group">
-        <label for="id_subject">Subject</label>
-        <input type="text" class="form-control" id="id_subject" name="subject">
-    </div>
-    <div class="form-group">
-        <label for="id_message">Message</label>
-        <textarea class="form-control" id="id_message" name="message" rows="5"></textarea>
-    <input type='submit' value='create board?'/>
-</form>
-
-<!-- <p><a href="{% url 'createboard' object.slug %}" object="{{ object }}">Create Board</a></p> -->
+<p><a href="{% url 'createboard' group.slug %}">Create Board</a></p>
+{% for board in group.board_set.all %}
+    <ul>
+        <li> {{ board }} </li>
+    </ul>
+{% endfor %}
 
 {% endblock %}

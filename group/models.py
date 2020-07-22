@@ -81,7 +81,7 @@ class Board(models.Model):
 
 
     def __str__(self):
-        return str(self.topic)
+        return str(self.topic + "---" + str(self.last_updated))
 
 
 

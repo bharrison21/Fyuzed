@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import GroupList, CreateGroup, ViewGroup, CreateBoard
+from .views import GroupList, CreateGroup, ViewGroup
 from . import views
 from django.views.generic.base import TemplateView
 
@@ -19,5 +19,6 @@ urlpatterns = [
     path('viewgroup/<slug:the_slug>/deletegroup', views.delete_group, name="deletegroup"),
 
     path('viewgroup/<slug:the_slug>/createboard', views.create_board, name="createboard"),
+
 
 ]

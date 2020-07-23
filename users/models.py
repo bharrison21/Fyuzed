@@ -16,7 +16,6 @@ class CustomUser(AbstractUser):
     # first_name = models.TextField()
     # last_name = models.TextField()
     # bio = models.TextField(max_length=500)
-    # #this is probably gonna be a bitch to get working
     # profile_picture = models.ImageField()
 
     # #type=model relationship; one user relationship to many other users

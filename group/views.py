@@ -8,8 +8,8 @@ from django.http import HttpResponse
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView
 
-from .models import Group, Membership, Board
-from .forms import GroupCreationForm, BoardCreationForm
+from .models import Group, Membership, Board, Post
+from .forms import GroupCreationForm, BoardCreationForm, PostCreationForm
 
 from users.models import CustomUser
 # Create your views here.
@@ -81,6 +81,7 @@ def join_group(request, the_slug):
         return render(request, 'groups_home.html')
 
 
+
 def leave_group(request, the_slug):
     if request.method == "POST":
         # gets the current group based on its slug
@@ -94,26 +95,6 @@ def leave_group(request, the_slug):
             # delete the membership object that was used as a through field
 
         return render(request, 'groups_home.html')
-        
-
-
-# class CreateBoard(CreateView):
-#     form_class = BoardCreationForm
-#     success_url = reverse_lazy('viewgroup')
-#     template_name = "create_board.html"
-
-#     slug_url_kwarg = 'the_slug'
-#     slug_field = 'slug'
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         return context
-
-#     def form_valid(self, form):
-#         form.instance.starter = self.request.user
-#         form.instance.group = get_object_or_404(Group, slug=slug_field)
-
-#         return super(CreateBoard, self).form_valid(form)
 
 
 
@@ -121,14 +102,13 @@ def create_board(request, the_slug):
     _group = get_object_or_404(Group, slug = the_slug)
 
     if request.method == 'POST':
-        subject = request.POST['topic']
-        message = request.POST['description']
+        _topic = request.POST['topic']
+        _description = request.POST['description']
 
         user = request.user
+        board = Board.objects.create(topic = _topic, description = _description, starter = user, group = _group)
 
-        board = Board.objects.create(topic = subject, description = message, starter = user, group = _group)
-
-        return redirect('viewgroup', the_slug=the_slug)
+        return redirect('viewgroup', the_slug = the_slug)
     else:
         context = {
             'group': _group, 
@@ -136,20 +116,58 @@ def create_board(request, the_slug):
             'form': BoardCreationForm,
         }
 
-        return render(request, 'create_board.html', context)
+    return render(request, 'view_board.html', context)
     
 
 
+class ViewBoard(DetailView):
+    model = Board
+    template_name = 'view_board.html'
 
 
-def delete_board(request, the_slug):
-    pass
 
-def create_post(request, the_slug):
-    pass
+def delete_board(request, the_slug, pk):
+    if request.method == "POST":
+        board = get_object_or_404(Board, pk = pk)
+        _group = get_object_or_404(Group, slug = the_slug)
+        if board.starter == request.user:
+            board.delete()
+        context = {
+            'slug': the_slug,
+            'group': _group,
+        }
+        return render(request, 'view_group.html', context)
 
-def delete_post(request, the_slug):
-    pass
+
+
+def create_post(request, the_slug, pk):
+    _board = get_object_or_404(Board, pk = pk)
+    _group = get_object_or_404(Group, slug=the_slug)
+
+    if request.method == "POST":
+        _content = request.POST['content']
+        user = request.user
+
+        post = Post.objects.create(content = _content, board = _board, created_by = user)
+    
+        return redirect('viewboard', the_slug = the_slug, pk = pk)
+    else:
+        context = {
+        'group': _group, 
+        'board': _board,
+        'form': PostCreationForm,
+        }
+        return render(request, 'create_post.html', context)
+
+
+
+def delete_post(request, the_slug, board_pk, post_pk):
+    if request.method == "POST":
+        post = get_object_or_404(Post, pk = post_pk)
+        if post.created_by == request.user:
+            post.delete()
+    return redirect('viewboard', the_slug=the_slug, pk=board_pk)
+
 
 
 

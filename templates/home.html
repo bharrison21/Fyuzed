@@ -6,7 +6,6 @@
 {% csrf_token %}
 {% if user.is_authenticated %}
   Hi {{ user.username }}!
-  <p><a href="{% url 'logout' %}">logout</a></p>
   <p><a href="{% url 'userlist' %}">List of all registered users</a></p>
   <p><a href="{% url 'profile' user.slug %}">Profile page</a></p>
   <p><a href="{% url 'grouphome' %}">Groups</a></p>

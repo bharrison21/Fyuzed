@@ -95,9 +95,9 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True)
     created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="post_creator")
-    updated_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, related_name="post_updater")
-
+#this would make it so you can 'post' as a reply to another post, and not only to the main board
+    # post = models.ForeignKey(Post, on_delete=models.CASCADE)
 
 
     def __str__(self):
-        return str(self.created_by + self.created_at)
+        return str(self.created_by) + str(self.created_at)

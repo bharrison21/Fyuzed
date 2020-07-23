@@ -51,7 +51,7 @@
 <p><a href="{% url 'createboard' group.slug %}">Create Board</a></p>
 {% for board in group.board_set.all %}
     <ul>
-        <li> {{ board }} </li>
+        <li> {{ board }} -- <a href="{% url 'viewboard' group.slug board.id %}">View Board</a></li>
     </ul>
 {% endfor %}
 

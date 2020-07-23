@@ -6,6 +6,8 @@ from django.http import HttpResponse
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser
 
+from django.contrib.auth import logout
+
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
@@ -60,7 +62,9 @@ class ProfileUpdate(UpdateView):
         return reverse_lazy("profile", args=(self.object.slug,))
     
 
-
+# def logout(request):
+#     logout(request)
+#     redirect(settings.LOGIN_REDIRECT_URL)
 
 #should probably add a delete account view
 

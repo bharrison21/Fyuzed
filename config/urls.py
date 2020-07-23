@@ -20,10 +20,10 @@ from django.views.generic.base import TemplateView
 urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('admin/', admin.site.urls),
-    #extends to users/urls.py
-    path('users/', include('users.urls')),
-    path('users/', include('django.contrib.auth.urls')),
     #extends to groups/urls.py
     path('group/', include('group.urls')),
     path('group/', include('django.contrib.auth.urls')),
+    #extends to users/urls.py
+    path('users/', include('users.urls')),
+    path('users/', include('django.contrib.auth.urls')),
 ]

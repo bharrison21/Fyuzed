@@ -28,6 +28,7 @@ def search(request):
             'radio': radio,
         }
 
+        #probably want to limit to first 10-50 results for the sake of time
         if radio == 'users':
             results = CustomUser.objects.filter(username__contains=query)
             context['results'] = results

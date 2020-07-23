@@ -1,0 +1,54 @@
+TODO:
+
+Small tasks:
+- organize the templates into folders based on what they're for
+    - would have to change the views functions to access all the new file locations
+- add login required (mixin or otherwise) to the appropriate views functions 
+- ***** test the view functions for each model (in tests.py) ***** 
+- add in an edit board option
+- add a way to view other user's profiles
+
+
+
+
+
+
+CustomUser model:
+- add more fields so it's a more complete profile (especially academic info, interests, etc.)
+- add friends list
+- make the profile page better
+
+
+Groups:
+- Make working boards and posts
+    - NEXT UP: - nested posts / replies
+    - upload different document types
+- Make different permission levels so the creator can assign users to be group administrators 
+    - instead of just checking if the user is the creator of something, see if they have the permission
+        - need to dynamically allocated permissions then -- group creator can edit / delete boards or posts, etc.
+
+
+Search:
+- make a more advanced query system and display
+- suggestions and autocomplete 
+
+
+Suggestion:
+- priority is class suggestions to help students schedule
+- also want suggested friends and groups 
+    - search bar and also other places 
+
+
+Authentication:
+- legitemate email and password Authentication
+    - only umich email
+
+
+REST framework:
+- begin implementing an API through the django REST framework 
+- use the API to create a reactive frontend (ReactJS probably) that works on mobile and web
+- https://medium.com/swlh/build-your-first-rest-api-with-django-rest-framework-e394e39a482c 
+
+
+Long term:
+- analytics collection

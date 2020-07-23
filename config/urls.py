@@ -26,4 +26,7 @@ urlpatterns = [
     #extends to users/urls.py
     path('users/', include('users.urls')),
     path('users/', include('django.contrib.auth.urls')),
+    #extends to search/urls.py
+    path('search/', include('search.urls')),
+    path('search/', include('django.contrib.auth.urls')),
 ]

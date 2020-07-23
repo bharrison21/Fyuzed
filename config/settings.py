@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     #groups app
     'group.apps.GroupConfig',
+    #search app
+    'search.apps.SearchConfig',
 ]
 
 MIDDLEWARE = [

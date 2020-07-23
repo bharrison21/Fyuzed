@@ -4,8 +4,11 @@
   <meta charset="utf-8">
   <title>{% block title %}Fyuzed{% endblock %}</title>
   <a href="{% url 'home' %}">Home</a>
+  - - 
   {% if user.is_authenticated %}
   <a href="{% url 'profile' user.slug %}">Profile</a>
+  - -
+  <a href="{% url 'search' %}">Search</a>
   {% endif %}
 
   <hr>

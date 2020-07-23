@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Page{% endblock %}
+
+{% block content %}
+
+
+<form action="{% url 'search' %}" method="GET">
+    <input name="query" type="text" placeholder="Search...">
+    <input type="submit" value="Search">
+    <br>
+    <input name="category" type="radio" value='users'/>Users
+    <input name="category" type="radio" value='groups'/>Groups
+    <input name="category" type="radio" value='boards'/>Boards
+</form>
+
+<hr>
+
+<div>
+    <ul>
+        {% for item in results %}
+            <li>{{ item }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+
+{% endblock %}

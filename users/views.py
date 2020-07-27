@@ -11,7 +11,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 
 #this type of view is called a Class-based view, so it can use form_class, success_url, and template_name
 class SignUpView(CreateView):
@@ -62,9 +62,44 @@ class ProfileUpdate(UpdateView):
         return reverse_lazy("profile", args=(self.object.slug,))
     
 
-# def logout(request):
-#     logout(request)
-#     redirect(settings.LOGIN_REDIRECT_URL)
+def send_friend_request(request, the_slug):
+    if request.method == "POST":
+        receiver = get_object_or_404(CustomUser, slug = the_slug)
+        sender = request.user
+        #if the current user is not already in the receiver's friend request list or friend list
+        if (not receiver.friend_requests.filter(slug = sender.slug).exists() and 
+        not receiver.friend_list.filter(slug = sender.slug).exists()):
+            sender.friend_requests.add(receiver,)
+        
+        #gets previous page url as string or None if they came from a different domain
+            # not necessary if you can only send request from view other profile page (complication should be avoided)
+        action = request.META.get('HTTP_REFERER')
+        if action is not None:
+            return redirect(action, the_slug=the_slug)
+        else:
+            return render(request, 'home.html')
+
+
+def handle_friend_request(request, the_slug):
+    #slug here is requester's slug
+    if request.method == "POST":
+        user = request.user
+        person = get_object_or_404(CustomUser, slug = the_slug)
+
+        decision = request.POST.get('decision')
+
+        # remove requester from friend requests
+        user.friend_requests.remove(person)
+        person.friend_requests.remove(user)
+
+        if decision == "Accept":
+            user.friend_list.add(person)
+            person.friend_list.add(user)
+        
+        return redirect('profile', user.slug)
+        
+
+
 
 #should probably add a delete account view
 

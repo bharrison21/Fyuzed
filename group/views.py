@@ -140,8 +140,8 @@ def delete_board(request, the_slug, pk):
 
 
 
-def create_post(request, the_slug, pk):
-    _board = get_object_or_404(Board, pk = pk)
+def create_post(request, the_slug, board_pk):
+    _board = get_object_or_404(Board, pk = board_pk)
     _group = get_object_or_404(Group, slug=the_slug)
 
     if request.method == "POST":
@@ -150,7 +150,7 @@ def create_post(request, the_slug, pk):
 
         post = Post.objects.create(content = _content, board = _board, created_by = user)
     
-        return redirect('viewboard', the_slug = the_slug, pk = pk)
+        return redirect('viewboard', the_slug = the_slug, pk = board_pk)
     else:
         context = {
         'group': _group, 

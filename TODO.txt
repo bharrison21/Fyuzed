@@ -7,6 +7,9 @@ Small tasks:
 - ***** test the view functions for each model (in tests.py) ***** 
 - add in an edit board option
 - add a way to view other user's profiles
+- get rid of any floating numbers -- make them constants somewhere
+- delete account option 
+- do something with the membership model (e.g. display when that user joined the group)
 
 
 
@@ -15,8 +18,12 @@ Small tasks:
 
 CustomUser model:
 - add more fields so it's a more complete profile (especially academic info, interests, etc.)
-- add friends list
+- add friends list -- friend requests list
 - make the profile page better
+
+
+Messaging:
+- messaging between friends 
 
 
 Groups:

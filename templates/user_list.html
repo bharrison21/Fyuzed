@@ -7,7 +7,10 @@
 <ul>
     {% csrf_token %}
     {% for user in object_list %}
-        <p><li>USERNAME: {{ user.username }}, EMAIL: {{ user.email }}</li></p>
+        <p><li>USERNAME: {{ user.username }}, EMAIL: {{ user.email }}</li>
+            <a href="{% url 'profile' user.slug %}">View Profile</a>
+        </p>
+        
     {% endfor %}
 </ul>
 {% endblock %}

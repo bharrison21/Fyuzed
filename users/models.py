@@ -3,8 +3,6 @@ from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
 
-#from community.models import Organization
-
 
 class CustomUser(AbstractUser):
     #slug (and pk) allow custom urls for different users, groups, etc. -- slugs make the custom url more
@@ -18,15 +16,13 @@ class CustomUser(AbstractUser):
     # bio = models.TextField(max_length=500)
     # profile_picture = models.ImageField()
 
-    # #type=model relationship; one user relationship to many other users
-    friend_list = models.ManyToManyField('CustomUser')
+    friend_list = models.ManyToManyField('CustomUser', related_name="friends")
+    friend_requests = models.ManyToManyField('CustomUser', related_name="friendrequests")
 
-    #list of all the groups a user is in
-    #group_list = models.ManyToManyField(Organization)
-
-
-
-
+    # could include links to other social medias / websites (i.e. twitter, linkedin, personal site)
+    # personal_url = models.URLField(
+    #     _("Personal URL"), max_length=555, blank=True, null=True
+    # )
 
     #overridden to include slug
     def save(self, *args, **kwargs):

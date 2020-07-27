@@ -30,15 +30,15 @@ def search(request):
 
         #probably want to limit to first 10-50 results for the sake of time
         if radio == 'users':
-            results = CustomUser.objects.filter(username__contains=query)
+            results = CustomUser.objects.filter(username__icontains=query)
             context['results'] = results
 
         elif radio == 'groups':
-            results = Group.objects.filter(name__contains=query)
+            results = Group.objects.filter(name__icontains=query)
             context['results'] = results
 
         elif radio == 'boards':
-            results = Board.objects.filter(topic__contains=query)
+            results = Board.objects.filter(topic__icontains=query)
             context['results'] = results
 
         return render(request, 'search/search_page.html', context)

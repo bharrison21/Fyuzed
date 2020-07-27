@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Sign Up{% endblock %}
+{% block title %}Profile{% endblock %}
 
 {% block content %}
 {% csrf_token %}
@@ -12,7 +12,9 @@
         <p>Is super user: {{ object.is_superuser }}</p>
         <p>Is active account: {{ object.is_active }}</p>
     </div>
+
     <br>
+
     <div>
         <p>List of groups:</p>
         <ul>
@@ -21,10 +23,49 @@
             {% endfor %}
         </ul>
     </div>
+
     <br>
+
     <div>
+        {% if object == user %}
+            <h5>Friends</h5>
+            {% for friend in object.friends.all %}
+                <!-- show friends list -->
+                <li> {{ friend }} </li>
+            {% endfor %}
+
+            <h5>Friend Requests</h5>
+            {% for person in object.friendrequests.all %}
+                <!-- show each friend request and choose to accept or decline, must contain requester's slug -->
+                <li> 
+                    {{ person }} 
+                    <form method="POST" action="{% url 'handle_friend_request' person.slug %}">
+                        {% csrf_token %}
+                        <input type="submit" value="Accept" name="decision">
+                        <input type="submit" value="Decline" name="decision">
+                    </form>
+
+                </li>
+            {% endfor %}
+
+        {% else %}
+
+                <!-- send friend request, must contain receiver slug-->
+                <form method="POST" action="{% url 'send_friend_request' object.slug %}">
+                    {% csrf_token %}
+                    <input type="submit" value="Send Friend Request">
+                </form>
+
+        {% endif %}
+    </div>
+
+    <br>
+
+    <div>
+        {% if object == user %}
         <p><a href="{% url 'edituser' object.slug %}">Edit Profile</a></p>
         <p><a href="{% url 'logout' %}">logout</a></p>
+        {% endif %}
         <p><a href="{% url 'home' %}">Home</a></p>
     </div>
 

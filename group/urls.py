@@ -11,7 +11,8 @@ from django.views.generic.base import TemplateView
 urlpatterns = [
     path('grouplist/', GroupList.as_view(), name="grouplist"),
     path('grouphome/', TemplateView.as_view(template_name='groups_home.html'), name="grouphome"),
-    path('creategroup/', CreateGroup.as_view(), name="creategroup"),
+    # path('creategroup/', CreateGroup.as_view(), name="creategroup"),
+    path('creategroup/', views.create_group, name="creategroup"),
     path('<slug:the_slug>/', ViewGroup.as_view(), name="viewgroup"),
 
     path('<slug:the_slug>/joingroup', views.join_group, name="joingroup"),
@@ -21,6 +22,6 @@ urlpatterns = [
     path('<slug:the_slug>/createboard', views.create_board, name="createboard"),
     path('<slug:the_slug>/viewboard/<int:pk>', ViewBoard.as_view(), name="viewboard"),
     path('<slug:the_slug>/viewboard/<int:pk>/deleteboard', views.delete_board, name="deleteboard"),
-    path('<slug:the_slug>/viewboard/<int:pk>/createpost', views.create_post, name="createpost"),
+    path('<slug:the_slug>/viewboard/<int:board_pk>/createpost', views.create_post, name="createpost"),
     path('<slug:the_slug>/viewboard/<int:board_pk>/deletepost/<int:post_pk>', views.delete_post, name="deletepost"),
 ]

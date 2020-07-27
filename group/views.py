@@ -12,6 +12,9 @@ from .models import Group, Membership, Board, Post
 from .forms import GroupCreationForm, BoardCreationForm, PostCreationForm
 
 from users.models import CustomUser
+
+
+from django.utils.text import slugify
 # Create your views here.
 
 
@@ -23,7 +26,22 @@ class CreateGroup(CreateView):
     #assigns creator of the group, so only they can delete it
     def form_valid(self, form):
         form.instance.created_by = self.request.user
+        #need to add the creator to the members list
         return super(CreateGroup, self).form_valid(form)
+
+def create_group(request):
+    if request.method == "POST":
+        _name = request.POST['name']
+        _description = request.POST['description']
+        user = request.user
+
+        group = Group.objects.create(name = _name, description = _description, created_by = user)
+        #add the creator to the group
+        join_group(request, group.slug)
+    
+        return redirect('viewgroup', the_slug = group.slug)
+    else:
+        return render(request, 'create_group.html', {'form': GroupCreationForm})
 
 
 
@@ -78,7 +96,7 @@ def join_group(request, the_slug):
 
             #add that member to the group's member list
             group.members.add(user,)
-        return render(request, 'groups_home.html')
+        return redirect('viewgroup', the_slug)
 
 
 
@@ -94,7 +112,7 @@ def leave_group(request, the_slug):
             Membership.objects.filter(person = user).delete()
             # delete the membership object that was used as a through field
 
-        return render(request, 'groups_home.html')
+        return redirect('viewgroup', the_slug)
 
 
 
@@ -116,7 +134,7 @@ def create_board(request, the_slug):
             'form': BoardCreationForm,
         }
 
-    return render(request, 'view_board.html', context)
+        return render(request, 'create_board.html', context)
     
 
 

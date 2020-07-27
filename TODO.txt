@@ -6,10 +6,10 @@ Small tasks:
 - add login required (mixin or otherwise) to the appropriate views functions 
 - ***** test the view functions for each model (in tests.py) ***** 
 - add in an edit board option
-- add a way to view other user's profiles
 - get rid of any floating numbers -- make them constants somewhere
 - delete account option 
 - do something with the membership model (e.g. display when that user joined the group)
+- could make a friendship through model to define friendship like membership
 
 
 
@@ -18,7 +18,6 @@ Small tasks:
 
 CustomUser model:
 - add more fields so it's a more complete profile (especially academic info, interests, etc.)
-- add friends list -- friend requests list
 - make the profile page better
 
 
@@ -33,6 +32,7 @@ Groups:
 - Make different permission levels so the creator can assign users to be group administrators 
     - instead of just checking if the user is the creator of something, see if they have the permission
         - need to dynamically allocated permissions then -- group creator can edit / delete boards or posts, etc.
+- use the membership model
 
 
 Search:

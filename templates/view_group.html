@@ -47,8 +47,15 @@
 
 <br>
 
+
 <h3>Boards</h3>
+
+{% if user in group.members.all %}
 <p><a href="{% url 'createboard' group.slug %}">Create Board</a></p>
+{% else %}
+    <p>Join group to create boards</p>
+{% endif %}
+
 {% for board in group.board_set.all %}
     <ul>
         <li> {{ board }} -- <a href="{% url 'viewboard' group.slug board.id %}">View Board</a></li>

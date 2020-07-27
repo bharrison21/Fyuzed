@@ -21,7 +21,7 @@
         {% for item in results %}
             <li> {{ item }}
                 {% if radio == "users" %}
-                    <!-- make a way to view other users' profiles here -->
+                <a href="{% url 'profile' item.slug %}">View Profile</a>
                 {% endif %}
                 {% if radio == "groups" %}
                 <a href="{% url 'viewgroup' item.slug %}">View Group</a>

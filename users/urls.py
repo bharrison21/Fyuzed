@@ -15,5 +15,7 @@ urlpatterns = [
     #path('profile/<slug:the_slug/logout/', views.logout, name='logout'),
     path('profile/<slug:the_slug>/send_friend_request', views.send_friend_request, name='send_friend_request'),
     path('profile/<slug:the_slug>/handle_friend_request', views.handle_friend_request, name='handle_friend_request'),
+
+    path('friendsuggestions/', views.get_friend_suggestions, name='friendsuggestions')
     
 ]

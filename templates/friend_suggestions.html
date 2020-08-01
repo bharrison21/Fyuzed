@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}List of Groups{% endblock %}
+
+{% block content %}
+<h2>Friend suggestions</h2>
+
+<!-- <form method="GET" action="{% url 'friendsuggestions' %}">
+    {% csrf_token %}
+    <input type='submit' value='Get suggestions'>
+</form> -->
+
+<ul>
+    {% for k, v in context.items %}
+       <li><a href="{% url 'profile' k.slug %}">{{ k.username }}:</a> {{ v }}</li>
+    {% endfor %}
+</ul>
+
+<br>
+
+<a href="{% url 'profile' user.slug %}">Profile</a>
+
+{% endblock %}

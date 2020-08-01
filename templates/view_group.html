@@ -9,11 +9,12 @@
         <p style="font-weight: bold;">Group name: {{ group.name }}</p>
         <p>Description: {{ group.description }}</p>
         <p>Created at: {{ group.created_at }}</p>
+        <p>Created by: {{ group.created_by }}</p>
         <p>Slug: {{ group.slug }}</p>
         <p>Member list: </p>
         <ul>
         {% for member in group.members.all %}
-            <li> {{ member }}</li>
+            <li><a href="{% url 'profile' member.slug %}">{{ member }}</a></li>
         {% endfor %}
         </ul>
     </p>

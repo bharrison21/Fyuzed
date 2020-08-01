@@ -29,6 +29,7 @@ class CreateGroup(CreateView):
         #need to add the creator to the members list
         return super(CreateGroup, self).form_valid(form)
 
+
 def create_group(request):
     if request.method == "POST":
         _name = request.POST['name']

@@ -5,15 +5,25 @@ Small tasks:
     - would have to change the views functions to access all the new file locations
 - add login required (mixin or otherwise) to the appropriate views functions 
 - ***** test the view functions for each model (in tests.py) ***** 
-- add in an edit board option
-- get rid of any floating numbers -- make them constants somewhere
-- delete account option 
+- add in an edit board option (maybe an edit post option)
+- get rid of any floating numbers & maybe text -- make them constants in a new settings.py app in each app
+- an option to delete your account
 - do something with the membership model (e.g. display when that user joined the group)
 - could make a friendship through model to define friendship like membership
+- block and report other users
+
+
+Plan:
+- make a friend suggestion algorithm to learn how to make suggestions
+    - also non-class related groups
+- learn how to access the Umich course catalog via its API 
+- use the friend suggestion system as a basis for a class suggestion algorithm 
 
 
 
-
+Calendar:
+- calendar for personal scheduling as well as group scheduling
+- some way to track classes taken and work experiences over time (might not necessarily be a calendar)
 
 
 CustomUser model:
@@ -56,6 +66,10 @@ REST framework:
 - use the API to create a reactive frontend (ReactJS probably) that works on mobile and web
 - https://medium.com/swlh/build-your-first-rest-api-with-django-rest-framework-e394e39a482c 
 
+
+Internal error handling:
+- when something goes wrong with the code, it should recover not show a 404 or something
+    - use try and catch statements (or whatever the python equivalent is)
 
 Long term:
 - analytics collection

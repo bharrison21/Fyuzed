@@ -1,7 +1,5 @@
 TODO:
 
-test
-
 Small tasks:
 - organize the templates into folders based on what they're for
     - would have to change the views functions to access all the new file locations

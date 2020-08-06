@@ -1,10 +1,12 @@
 TODO:
 
+test
+
 Small tasks:
 - organize the templates into folders based on what they're for
     - would have to change the views functions to access all the new file locations
-- add login required (mixin or otherwise) to the appropriate views functions 
-- ***** test the view functions for each model (in tests.py) ***** 
+- add login required (mixin or otherwise) to the appropriate views functions
+- ***** test the view functions for each model (in tests.py) *****
 - add in an edit board option (maybe an edit post option)
 - get rid of any floating numbers & maybe text -- make them constants in a new settings.py app in each app
 - an option to delete your account
@@ -16,8 +18,8 @@ Small tasks:
 Plan:
 - make a friend suggestion algorithm to learn how to make suggestions
     - also non-class related groups
-- learn how to access the Umich course catalog via its API 
-- use the friend suggestion system as a basis for a class suggestion algorithm 
+- learn how to access the Umich course catalog via its API
+- use the friend suggestion system as a basis for a class suggestion algorithm
 
 
 
@@ -32,14 +34,14 @@ CustomUser model:
 
 
 Messaging:
-- messaging between friends 
+- messaging between friends
 
 
 Groups:
 - Make working boards and posts
     - NEXT UP: - nested posts / replies
     - upload different document types
-- Make different permission levels so the creator can assign users to be group administrators 
+- Make different permission levels so the creator can assign users to be group administrators
     - instead of just checking if the user is the creator of something, see if they have the permission
         - need to dynamically allocated permissions then -- group creator can edit / delete boards or posts, etc.
 - use the membership model
@@ -47,13 +49,13 @@ Groups:
 
 Search:
 - make a more advanced query system and display
-- suggestions and autocomplete 
+- suggestions and autocomplete
 
 
 Suggestion:
 - priority is class suggestions to help students schedule
-- also want suggested friends and groups 
-    - search bar and also other places 
+- also want suggested friends and groups
+    - search bar and also other places
 
 
 Authentication:
@@ -62,9 +64,9 @@ Authentication:
 
 
 REST framework:
-- begin implementing an API through the django REST framework 
+- begin implementing an API through the django REST framework
 - use the API to create a reactive frontend (ReactJS probably) that works on mobile and web
-- https://medium.com/swlh/build-your-first-rest-api-with-django-rest-framework-e394e39a482c 
+- https://medium.com/swlh/build-your-first-rest-api-with-django-rest-framework-e394e39a482c
 
 
 Internal error handling:

@@ -36,7 +36,7 @@
     </form>
     {% endif %}
 
-    {% if group.created_by == user %}
+    {% if group.created_by == user and user in group.members.all %}
     <form method="POST" action="deletegroup" group="{{ group }}">
         {% csrf_token %}
         <input type='submit' value='delete "{{ group.name }}" ?' />

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Board{% endblock %}
+
+{% block content %}
+
+<h2>Edit Board</h2>
+<form method="POST" action="{% url 'editboard' board.group.slug board.id %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit", value="Update">
+</form>
+
+{% endblock %}

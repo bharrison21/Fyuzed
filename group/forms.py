@@ -24,3 +24,10 @@ class PostCreationForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('content',)
+
+
+
+class BoardUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Board
+        fields = ('topic', 'description', )

@@ -1,15 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.http import HttpResponse
 
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, UpdateView
 from django.views.generic.edit import CreateView
 
 from .models import Group, Membership, Board, Post
-from .forms import GroupCreationForm, BoardCreationForm, PostCreationForm
+from .forms import GroupCreationForm, BoardCreationForm, PostCreationForm, BoardUpdateForm
 
 from users.models import CustomUser
 
@@ -18,10 +19,11 @@ from django.utils.text import slugify
 # Create your views here.
 
 
-class CreateGroup(CreateView):
+# THIS CLASS BASED VIEW IS NOT CURRENTLY BEING USED, THE create_group() FUNCTION VIEW IS
+class CreateGroup(LoginRequiredMixin, CreateView):
     form_class = GroupCreationForm
     success_url = reverse_lazy('grouphome')
-    template_name = 'create_group.html'
+    template_name = 'groups/create_group.html'
 
     #assigns creator of the group, so only they can delete it
     def form_valid(self, form):
@@ -29,7 +31,7 @@ class CreateGroup(CreateView):
         #need to add the creator to the members list
         return super(CreateGroup, self).form_valid(form)
 
-
+@login_required
 def create_group(request):
     if request.method == "POST":
         _name = request.POST['name']
@@ -42,19 +44,19 @@ def create_group(request):
     
         return redirect('viewgroup', the_slug = group.slug)
     else:
-        return render(request, 'create_group.html', {'form': GroupCreationForm})
+        return render(request, 'groups/create_group.html', {'form': GroupCreationForm})
 
 
 
-class GroupList(ListView):
+class GroupList(LoginRequiredMixin, ListView):
     model = Group
-    template_name = "group_list.html"
+    template_name = "groups/group_list.html"
 
 
 
-class ViewGroup(DetailView):
+class ViewGroup(LoginRequiredMixin, DetailView):
     model = Group
-    template_name = 'view_group.html'
+    template_name = 'groups/view_group.html'
     #handles slug from urls (slug is url path that differs between models, 
     #   so different groups have different urls)
     slug_url_kwarg = 'the_slug'
@@ -67,21 +69,23 @@ class ViewGroup(DetailView):
         return context
 
 
-
+@login_required
 def delete_group(request, the_slug):
     #==== TODO ====
     #   make it so that not just anyone can delete the group (start with creator of the group, expand to admins)
     #   also test to see that it cleans up all its members properly 
 
+    user = request.user 
     if request.method == "POST":
         # gets the current group based on its slug
         group = get_object_or_404(Group, slug = the_slug)
-        if group.created_by == request.user:
+        if group.created_by == user and user in group.members.all():
             group.delete()
-    return render(request, 'groups_home.html')
+            return render(request, 'groups/groups_home.html')
+    return redirect('viewgroup', the_slug)
 
 
-
+@login_required
 def join_group(request, the_slug):
     if request.method == "POST":
         # gets the current group based on its slug
@@ -100,7 +104,7 @@ def join_group(request, the_slug):
         return redirect('viewgroup', the_slug)
 
 
-
+@login_required
 def leave_group(request, the_slug):
     if request.method == "POST":
         # gets the current group based on its slug
@@ -116,7 +120,7 @@ def leave_group(request, the_slug):
         return redirect('viewgroup', the_slug)
 
 
-
+@login_required
 def create_board(request, the_slug):
     _group = get_object_or_404(Group, slug = the_slug)
 
@@ -135,16 +139,42 @@ def create_board(request, the_slug):
             'form': BoardCreationForm,
         }
 
-        return render(request, 'create_board.html', context)
+        return render(request, 'groups/create_board.html', context)
     
 
 
-class ViewBoard(DetailView):
+class ViewBoard(LoginRequiredMixin, DetailView):
     model = Board
-    template_name = 'view_board.html'
+    template_name = 'groups/view_board.html'
 
 
 
+
+
+
+
+class EditBoard(LoginRequiredMixin, UpdateView):
+    #TODO: should have check to see if the user is creator / admin
+    model = Board
+    template_name = 'groups/edit_board.html'
+
+    slug_url_kwarg = 'group_slug'
+    slug_field = 'slug'
+
+    pk_url_kwarg = 'pk'
+    pk_field = 'int'
+
+    #fields = ['topic', 'description',]
+    form_class = BoardUpdateForm
+
+    #the url to go to next: 'profile/{slug}' --- self.object.slug gives updated username as slug
+    def get_success_url(self, **kwargs):         
+        return reverse_lazy("viewboard", args=(self.object.group.slug, self.object.pk))
+
+
+
+
+@login_required
 def delete_board(request, the_slug, pk):
     if request.method == "POST":
         board = get_object_or_404(Board, pk = pk)
@@ -155,13 +185,14 @@ def delete_board(request, the_slug, pk):
             'slug': the_slug,
             'group': _group,
         }
-        return render(request, 'view_group.html', context)
+        return render(request, 'groups/view_group.html', context)
 
 
 
+@login_required
 def create_post(request, the_slug, board_pk):
     _board = get_object_or_404(Board, pk = board_pk)
-    _group = get_object_or_404(Group, slug=the_slug)
+    _group = get_object_or_404(Group, slug = the_slug)
 
     if request.method == "POST":
         _content = request.POST['content']
@@ -176,10 +207,11 @@ def create_post(request, the_slug, board_pk):
         'board': _board,
         'form': PostCreationForm,
         }
-        return render(request, 'create_post.html', context)
+        return render(request, 'groups/create_post.html', context)
 
 
 
+@login_required
 def delete_post(request, the_slug, board_pk, post_pk):
     if request.method == "POST":
         post = get_object_or_404(Post, pk = post_pk)
@@ -191,8 +223,6 @@ def delete_post(request, the_slug, board_pk, post_pk):
 
 
 # TODO:
-#     - make it possible to create boards & posts
-#     - create friends list 
 #     - make admins for groups 
 #     - make some groups invite-only
 #     - Allocating permissions

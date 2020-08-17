@@ -12,12 +12,17 @@
         <p> <a href="{% url 'viewgroup' board.group.slug %}">Group</a></p>
     </div>
 
+
     <br>
+    
     {% if user in board.group.members.all %}
     <a href="{% url 'createpost' board.group.slug board.id %}">Add Post</a>
     {% else %}
     <p>Join group to create posts</p>
     {% endif %}
+
+
+
     <div>
         <ul>
             {% for post in board.post_set.all %}
@@ -35,7 +40,9 @@
         </ul>
     </div>
 
+
     <hr>
+
 
     <div>
         {% if board.starter == user %}
@@ -43,6 +50,12 @@
             {% csrf_token %}
             <input type='submit' value='delete board ?' />
         </form>
+
+        <form method="GET" action="{% url 'editboard' board.group.slug board.id %}" board="{{ board }}">
+            {% csrf_token %}
+            <input type='submit' value='edit board?' />
+        </form>
         {% endif %}
     </div>
+
 {% endblock %}

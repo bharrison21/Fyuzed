@@ -134,3 +134,5 @@ AUTH_USER_MODEL = 'users.CustomUser'
 #tell where to redirect after the login/logout, uses some built in functionality that idk anything about
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+
+LOGIN_URL = 'home'

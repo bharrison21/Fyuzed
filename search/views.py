@@ -4,6 +4,8 @@ from config.settings import AUTH_USER_MODEL
 from users.models import CustomUser
 from group.models import Group, Board
 
+from django.contrib.auth.decorators import login_required
+
 # class SearchResultsView(ListView):
 #     model = CustomUser
 #     template_name = 'search/search_page.html'
@@ -17,7 +19,7 @@ from group.models import Group, Board
 #         object_list = CustomUser.objects.filter(username__contains=query)
 #         return object_list
 
-
+@login_required
 def search(request):
     if request.method=="GET":
         radio = request.GET.get('category')

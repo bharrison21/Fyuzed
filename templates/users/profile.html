@@ -67,8 +67,10 @@
 
     <div>
         {% if object == user %}
-        <p><a href="{% url 'edituser' object.slug %}">Edit Profile</a></p>
+        <p><a href="{% url 'edituser' user.slug %}">Edit Profile</a></p>
         <p><a href="{% url 'logout' %}">logout</a></p>
+        <p><a href="{% url 'deleteaccount' user.slug %}">Delete Account?</a></p>
+
         {% endif %}
         <p><a href="{% url 'home' %}">Home</a></p>
     </div>

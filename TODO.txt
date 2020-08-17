@@ -11,6 +11,7 @@ Small tasks:
 - do something with the membership model (e.g. display when that user joined the group)
 - could make a friendship through model to define friendship like membership
 - block and report other users
+- group suggestions
 
 
 Plan:
@@ -33,6 +34,7 @@ CustomUser model:
 
 Messaging:
 - messaging between friends 
+- group messaging 
 
 
 Groups:

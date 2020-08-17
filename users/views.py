@@ -1,15 +1,16 @@
 from django.urls import reverse_lazy, reverse
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.http import HttpResponse
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser
 
-from django.contrib.auth import logout
+from django.contrib.auth import logout, authenticate, login
 
 from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
+from django.contrib.auth.mixins import LoginRequiredMixin
+# from django.utils.decorators import method_decorator
 
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -17,26 +18,45 @@ from django.shortcuts import render, redirect, get_object_or_404
 class SignUpView(CreateView):
     #form class defines which form to use
     form_class = CustomUserCreationForm
-    success_url = reverse_lazy('login')
-    template_name = 'signup.html'
+    success_url = reverse_lazy('home')
+    template_name = 'registration/signup.html'
     #can create member methods (also can apply method decorators)
 
+    #makes it automatically login after signup
+    def form_valid(self, form):
+        to_return = super().form_valid(form)
+        user = authenticate(
+            username=form.cleaned_data["username"],
+            password=form.cleaned_data["password1"],
+        )
+        login(self.request, user)
+        return to_return    
 
 
-class RegisteredUsersList(ListView):
+
+
+class DeleteAccount(LoginRequiredMixin, DeleteView):
     model = CustomUser
-    template_name = 'user_list.html'
+    # template_name = 'users/customuser_confirm_delete.html'
+    template_name = 'users/customuser_confirm_delete.html' 
+    success_url = reverse_lazy('home')
 
-#define other views here, they can also be a function-based view
-# Example:        # def example_view(request):
-#                 #     return render(request, 'home')
+    slug_url_kwarg = 'the_slug'
+    slug_field = 'slug'
+
+
+
+
+class RegisteredUsersList(LoginRequiredMixin, ListView):
+    model = CustomUser
+    template_name = 'users/user_list.html'
 
 
 
 # @method_decorator(login_required, name='get_context_data') #<--( this should prob be here but was causing problems )
-class ProfileView(DetailView):
+class ProfileView(LoginRequiredMixin, DetailView):
     model = CustomUser
-    template_name = 'profile.html'
+    template_name = 'users/profile.html'
     #handles slug from urls (slug is url path that differs between models, 
     #   so different users have different profile page urls)
     slug_url_kwarg = 'the_slug'
@@ -49,11 +69,11 @@ class ProfileView(DetailView):
 
 
 
-class ProfileUpdate(UpdateView):
+class ProfileUpdate(LoginRequiredMixin, UpdateView):
     model = CustomUser
     #fields = ['username',]
     form_class = CustomUserChangeForm
-    template_name= "customuser_update_form.html"
+    template_name= "users/customuser_update_form.html"
     slug_url_kwarg = 'the_slug'
     slug_field = 'slug'
 
@@ -62,6 +82,7 @@ class ProfileUpdate(UpdateView):
         return reverse_lazy("profile", args=(self.object.slug,))
     
 
+@login_required
 def send_friend_request(request, the_slug):
     if request.method == "POST":
         receiver = get_object_or_404(CustomUser, slug = the_slug)
@@ -81,6 +102,7 @@ def send_friend_request(request, the_slug):
             return render(request, 'home.html')
 
 
+@login_required
 def handle_friend_request(request, the_slug):
     #slug here is requester's slug
     if request.method == "POST":
@@ -99,15 +121,11 @@ def handle_friend_request(request, the_slug):
         
         return redirect('profile', user.slug)
 
-# should be able 
 
 #should probably add a delete account view
 
-def swap(first, second):
-    temp = first
-    first = second
-    second = temp
 
+@login_required
 def get_friend_suggestions(request):
     # should suggest based:
         #   - on mutual friends (i.e. a friend of multiple friends)
@@ -149,7 +167,7 @@ def get_friend_suggestions(request):
         #sort by value -- https://stackoverflow.com/questions/52141785/sort-dict-by-values-in-python-3-6 
         sorted_scores = {k: v for k, v in sorted(scores.items(), key=lambda item: item[1], reverse=True)}
         
-        return render(request, 'friend_suggestions.html', {'context': sorted_scores})
+        return render(request, 'users/friend_suggestions.html', {'context': sorted_scores})
 
         # make a dict where each key is a potential suggested friend
         # the value for each key is an integer value representing how good of suggestion that person is

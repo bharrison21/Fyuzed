@@ -1,13 +1,7 @@
 TODO:
 
 Small tasks:
-- organize the templates into folders based on what they're for
-    - would have to change the views functions to access all the new file locations
-- add login required (mixin or otherwise) to the appropriate views functions
 - ***** test the view functions for each model (in tests.py) *****
-- add in an edit board option (maybe an edit post option)
-- get rid of any floating numbers & maybe text -- make them constants in a new settings.py app in each app
-- an option to delete your account
 - do something with the membership model (e.g. display when that user joined the group)
 - could make a friendship through model to define friendship like membership
 - block and report other users
@@ -33,12 +27,9 @@ CustomUser model:
 
 
 Messaging:
-<<<<<<< HEAD
 - messaging between friends 
 - group messaging 
-=======
 - messaging between friends
->>>>>>> db10a00beb274b705107ae6434f8d4dc73572601
 
 
 Groups:

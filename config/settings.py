@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # enables use of rest framework
+    'rest_framework',
 
     #this is for the users app 
     'users.apps.UsersConfig',

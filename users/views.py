@@ -53,7 +53,6 @@ class RegisteredUsersList(LoginRequiredMixin, ListView):
 
 
 
-# @method_decorator(login_required, name='get_context_data') #<--( this should prob be here but was causing problems )
 class ProfileView(LoginRequiredMixin, DetailView):
     model = CustomUser
     template_name = 'users/profile.html'
@@ -142,7 +141,7 @@ def get_friend_suggestions(request):
             their_friends = friend.friend_list.all()
             # go through user's friends' friends
             for their_friend in their_friends:
-                # don't suggest yourself or people they you are already friends with
+                # don't suggest yourself or people that you are already friends with
                 if (their_friend.username != user.username) and (user not in their_friend.friend_list.all()):
                     if their_friend in scores:
                         # if they are already in scores, increase score

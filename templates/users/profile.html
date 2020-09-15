@@ -52,7 +52,7 @@
 
         {% else %}
             <!-- if this is not your profile and you're not in their friends list -->
-                <!-- should probably also include not in friend request list to avoid redundancy  -->
+                <!-- could also include not in friend request list to avoid redundancy  -->
             {% if user not in object.friends.all %}
             <form method="POST" action="{% url 'send_friend_request' object.slug %}">
                 {% csrf_token %}

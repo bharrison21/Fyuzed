@@ -2,9 +2,11 @@
 
 import requests 
 from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.support.ui import Select
 
 #URL to base LSA course guide 
-url="https://webapps.lsa.umich.edu/CrsMaint/Public/CB_PublicBulletin.aspx?crselevel=ug"
+url="https://webapps.lsa.umich.edu/CrsMaint/Public/CB_PublicBulletin.aspx?crselevel=ug/robots.txt"
 resp=requests.get(url)
 
 #Get all the text

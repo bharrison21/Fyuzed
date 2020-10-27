@@ -1,0 +1,29 @@
+#Web scraping algorithm to get all of the course info 
+
+import requests 
+from bs4 import BeautifulSoup
+
+#URL to base LSA course guide 
+url="https://webapps.lsa.umich.edu/CrsMaint/Public/CB_PublicBulletin.aspx?crselevel=ug"
+resp=requests.get(url)
+
+#Get all the text
+if resp.ok:
+    soup=BeautifulSoup(resp.content, 'html.parser')
+
+#find all of the areas in the text where there is "Option Value" in the html. 
+#This is where each element of the course guide is.
+#For example: <option value="2300">Summer 2020</option> or  <option value="COGSCI">COGSCI</option>
+    option=soup.findAll("option")
+
+#This makes each option value on a new line
+    for x in option:
+        x.extract()
+
+#This will return just the value, i.e "Music School" or "Summer 2020"
+        for x in x.extract():
+            x.strip('option')
+
+            print(x)
+    
+    

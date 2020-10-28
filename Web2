@@ -1,26 +1,39 @@
-import requests 
+import textwrap
+
 from bs4 import BeautifulSoup
-import selenium
-from selenium.webdriver.support.ui import Select
 from selenium import webdriver
-import os 
-import time
-from selenium.common import exceptions  
+from selenium.webdriver.chrome.options import Options
 
+options = Options()
+options.headless = False
+driver = webdriver.Chrome(options=options)
 
-driver = webdriver.Chrome()
-url=("https://webapps.lsa.umich.edu/CrsMaint/Public/CB_PublicBulletin.aspx?crselevel=ug/robots.txt")
-driver.get(url)
-time.sleep(1)
+driver.get("https://webapps.lsa.umich.edu/CrsMaint/Public/CB_PublicBulletin.aspx")
 
 driver.find_element_by_xpath('//*[@id="ContentPlaceHolder1_ddlPage"]/option[4]').click()
-
-driver.find_element_by_xpath('//*[@name="ctl00$ContentPlaceHolder1$ddlTerm"]/option[1]').click() 
-
-driver.find_element_by_xpath('//*[@name="ctl00$ContentPlaceHolder1$ddlSubject"]/option[8]').click() 
-
+driver.find_element_by_xpath('//*[@name="ctl00$ContentPlaceHolder1$ddlTerm"]/option[1]').click()
+driver.find_element_by_xpath('//*[@name="ctl00$ContentPlaceHolder1$ddlSubject"]/option[8]').click()
 driver.find_element_by_xpath('//*[@id="ContentPlaceHolder1_btnSearch"]').click()
 
+tables = BeautifulSoup(driver.page_source, "html.parser").find_all("td", {"valign": "top"})
 
 
+def wrapper(text: str, width: int = 120) -> str:
+    return "\n".join(textwrap.wrap(text, width=width)) + "\n"
 
+
+for table in tables:
+    try:
+        title = table.find("b").getText(strip=True)
+        course_info = " ".join(table.find("i").text.split())
+        desc = table.find("p").getText(strip=True)
+        urls = [f"{a.text.strip()} - {a['href']}" for a in table.find_all("a")]
+        print(title)
+        print(wrapper(course_info))
+        print(wrapper(desc))
+        print("\n".join(urls) if urls else "No URL's found.")
+        print("-" * 120)
+    except AttributeError:
+        continue
+
+driver.close()

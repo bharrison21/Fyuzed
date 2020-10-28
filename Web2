@@ -1,0 +1,26 @@
+import requests 
+from bs4 import BeautifulSoup
+import selenium
+from selenium.webdriver.support.ui import Select
+from selenium import webdriver
+import os 
+import time
+from selenium.common import exceptions  
+
+
+driver = webdriver.Chrome()
+url=("https://webapps.lsa.umich.edu/CrsMaint/Public/CB_PublicBulletin.aspx?crselevel=ug/robots.txt")
+driver.get(url)
+time.sleep(1)
+
+driver.find_element_by_xpath('//*[@id="ContentPlaceHolder1_ddlPage"]/option[4]').click()
+
+driver.find_element_by_xpath('//*[@name="ctl00$ContentPlaceHolder1$ddlTerm"]/option[1]').click() 
+
+driver.find_element_by_xpath('//*[@name="ctl00$ContentPlaceHolder1$ddlSubject"]/option[8]').click() 
+
+driver.find_element_by_xpath('//*[@id="ContentPlaceHolder1_btnSearch"]').click()
+
+
+
+

@@ -17,7 +17,10 @@ for tag in subject_tags:
 def wrapper(text: str, width: int = 120) -> str:
     return "\n".join(textwrap.wrap(text, width=width)) + "\n"
 
-
+filename="course_info.csv"
+csv_writer=csv.writer(open(filename,'w'))
+headers=['name','info','description','url']
+csv_writer.writerow(headers)
 for subject in subjects:
 
     headers = {
@@ -56,26 +59,28 @@ for subject in subjects:
     '__VIEWSTATEGENERATOR': '2D833CB4',
     '__EVENTVALIDATION': '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'
     }
-
+ 
     response = requests.post('https://webapps.lsa.umich.edu/CrsMaint/Public/CB_PublicBulletin.aspx', headers=headers, params=params, data=data)
-
     tables = soup(response.text, "html.parser").find_all("td", {"valign": "top"})
     for table in tables:
         try:
-            title = table.find("b").getText(strip=True)
+            title=table.find("b").getText(strip=True)
             course_info = " ".join(table.find("i").text.split())
-            desc = table.find("p").getText(strip=True)
+            description = table.find("p").getText(strip=True)
             urls = [f"{a.text.strip()} - {a['href']}" for a in table.find_all("a")]
-            titles=[]
+            csv_writer.writerow([title,course_info,description,urls])
+         
+           
+            #if "." in title:
+                #title=(title.split('. '))[0]
+                #if "/" in title:
+                    #title=(title.split("/"))[0]
+            #titles.append(title[0:])
             
-            if "." in title:
-                title=(title.split('. '))[0]
-                if "/" in title:
-                    title=(title.split("/"))[0]
-            titles.append(title[0:])
-            with open ('course_info.csv','w',newline='') as fp:
-                a=csv.writer(fp, delimiter=',')
-                a.writerow(titles)
+
+            
+                    
+                
                    
         
                 

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Page{% endblock %}
+
+{% block content %}
+
+
+<form action="{% url 'search' %}" method="GET">
+    <input name="query" type="text" placeholder="Search...">
+    <input type="submit" value="Search">
+    <br>
+    <input name="category" type="radio" value='users'/>Users
+    <input name="category" type="radio" value='groups'/>Groups
+    <input name="category" type="radio" value='boards'/>Boards
+</form>
+
+<hr>
+
+<div>
+    <ul>
+        {% for item in results %}
+            <li> {{ item }}
+                {% if radio == "users" %}
+                <a href="{% url 'profile' item.slug %}">View Profile</a>
+                {% endif %}
+                {% if radio == "groups" %}
+                <a href="{% url 'viewgroup' item.slug %}">View Group</a>
+                {% endif %}
+                {% if radio == "boards" %}
+                <a href="{% url 'viewboard' item.group.slug item.id %}">View Board</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+
+{% endblock %}

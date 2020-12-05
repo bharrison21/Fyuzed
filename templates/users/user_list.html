@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Temp: Registered users{% endblock %}
+
+{% block content %}
+<h2>Temp: Registered Users</h2>
+<ul>
+    {% csrf_token %}
+    {% for user in object_list %}
+        <p><li>USERNAME: {{ user.username }}, EMAIL: {{ user.email }}</li>
+            <a href="{% url 'profile' user.slug %}">View Profile</a>
+        </p>
+        
+    {% endfor %}
+</ul>
+{% endblock %}

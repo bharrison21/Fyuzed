@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}View Board{% endblock %}
+
+{% block content %}
+<h2>Create Post</h2>
+
+    <div>
+        {% if user in board.group.members.all %}
+            
+            <form method="POST" action="{% url 'createpost' board.group.slug board.id %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type='submit' value='Create post'>
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}
+
+
+<!-- <form method="POST" action="{% url 'createpost' board.group.slug board.id %}"> -->

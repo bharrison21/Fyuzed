@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+{% csrf_token %}
+    <h2> {{ object.username }}'s Profile Page</h2>
+
+    <div>
+        <p>Username: {{ object.username }}</p>
+        <p>Email: {{ object.email }}</p>
+        <p>Is super user: {{ object.is_superuser }}</p>
+        <p>Is active account: {{ object.is_active }}</p>
+    </div>
+
+    <br>
+
+    <div>
+        <h5>List of groups:</h5>
+        <ul>
+            {% for group in object.group_set.all %}
+            <li><a href="{% url 'viewgroup' group.slug %}">{{ group.name }}</a></li>
+            {% endfor %}
+        </ul>
+
+        <h5>Friends</h5>
+            {% for friend in object.friends.all %}
+                <!-- show friends list -->
+                <li><a href="{% url 'profile' friend.slug %}">{{ friend }}</a></li>
+            {% endfor %}
+    </div>
+
+    <br>
+
+    <div>
+        {% if object == user %}
+            <h5>Friend suggestions</h5>
+            <a href="{% url 'friendsuggestions' %}">Get suggestions</a>
+
+        <h5>Friend Requests</h5>
+        {% for person in object.friendrequests.all %}
+            <!-- show each friend request and choose to accept or decline, must contain requester's slug -->
+            <li> 
+                {{ person }} 
+                <form method="POST" action="{% url 'handle_friend_request' person.slug %}">
+                    {% csrf_token %}
+                    <input type="submit" value="Accept" name="decision">
+                    <input type="submit" value="Decline" name="decision">
+                </form>
+            </li>
+        {% endfor %}
+
+        {% else %}
+            <!-- if this is not your profile and you're not in their friends list -->
+                <!-- could also include not in friend request list to avoid redundancy  -->
+            {% if user not in object.friends.all %}
+            <form method="POST" action="{% url 'send_friend_request' object.slug %}">
+                {% csrf_token %}
+                <input type="submit" value="Send Friend Request">
+            </form>
+            {% endif %}
+
+        {% endif %}
+    </div>
+
+    <hr>
+
+    <div>
+        {% if object == user %}
+        <p><a href="{% url 'edituser' user.slug %}">Edit Profile</a></p>
+        <p><a href="{% url 'logout' %}">logout</a></p>
+        <p><a href="{% url 'deleteaccount' user.slug %}">Delete Account?</a></p>
+
+        {% endif %}
+        <p><a href="{% url 'home' %}">Home</a></p>
+    </div>
+
+{% endblock %}

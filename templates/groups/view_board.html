@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}View Board{% endblock %}
+
+{% block content %}
+<h2>View Board</h2>
+    <div>
+        <h3> <u>Topic:</u> {{ board.topic}} </h3>
+        <p> <u>Description:</u> {{ board.description }} </p>
+        <p> <u>Last updated:</u> {{ board.last_updated }} </p>
+        <p> <u>Starter:</u> {{ board.starter }} </p>
+        <p> <a href="{% url 'viewgroup' board.group.slug %}">Group</a></p>
+    </div>
+
+
+    <br>
+    
+    {% if user in board.group.members.all %}
+    <a href="{% url 'createpost' board.group.slug board.id %}">Add Post</a>
+    {% else %}
+    <p>Join group to create posts</p>
+    {% endif %}
+
+
+
+    <div>
+        <ul>
+            {% for post in board.post_set.all %}
+            <div style='border-style:solid; width:500px; text-indent: 10px;'>
+                <p><u>{{ post.created_by }}</u></p>
+                <p> {{ post.content }} </p>
+                {% if post.created_by == user %}
+                    <form method="POST" action="{% url 'deletepost' board.group.slug board.id post.id%}">
+                        {% csrf_token %}
+                        <input type="submit" value="Delete">
+                    </form>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </ul>
+    </div>
+
+
+    <hr>
+
+
+    <div>
+        {% if board.starter == user %}
+        <form method="POST" action="{% url 'deleteboard' board.group.slug board.id %}" board="{{ board }}">
+            {% csrf_token %}
+            <input type='submit' value='delete board ?' />
+        </form>
+
+        <form method="GET" action="{% url 'editboard' board.group.slug board.id %}" board="{{ board }}">
+            {% csrf_token %}
+            <input type='submit' value='edit board?' />
+        </form>
+        {% endif %}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Listings{% endblock %}
+
+{% block content %}
+<h2>Listings</h2>
+
+
+<ul>
+    {% for listing in object_list %}
+        <p>
+            <li style="font-weight: bold;">Nameame: {{ listing.name }}</li>
+            Info: {{ listing.info }}
+            <a href="{% url 'viewlisting' %}">View listing</a>
+        </p>
+    {% endfor %}
+</ul>
+
+
+{% endblock %}

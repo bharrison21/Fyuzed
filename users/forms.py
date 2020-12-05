@@ -9,6 +9,7 @@ class CustomUserCreationForm(UserCreationForm):
         #fields automatically includes password1 and password2 
         fields = ('username', 'email')
 
+
 class CustomUserChangeForm(UserChangeForm):
 
     class Meta:

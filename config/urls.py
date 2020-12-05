@@ -29,4 +29,7 @@ urlpatterns = [
     #extends to search/urls.py
     path('search/', include('search.urls')),
     path('search/', include('django.contrib.auth.urls')),
+    #extends to courses/urls.py
+    path('courses/', include('courses.urls')),
+    path('courses/', include('django.contrib.auth.urls')),
 ]

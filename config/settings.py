@@ -37,8 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # enables use of rest framework
-    'rest_framework',
 
     #this is for the users app 
     'users.apps.UsersConfig',
@@ -46,6 +44,8 @@ INSTALLED_APPS = [
     'group.apps.GroupConfig',
     #search app
     'search.apps.SearchConfig',
+    #courses app
+    'courses.apps.CoursesConfig'
 ]
 
 MIDDLEWARE = [
@@ -128,6 +128,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 
 

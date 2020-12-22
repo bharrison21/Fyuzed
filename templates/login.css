@@ -96,6 +96,7 @@ section {
     color: #696969;
     margin: 15px 5px;
 }
+
 .signup .signup-form input{
     margin-top: 50px;
     font-size: 15px;
@@ -105,7 +106,7 @@ section {
     border-radius: 3px;
     margin-right: 10px;
 }
-.signup .signup-form .lastname,{
+.signup .signup-form .lastname{
     margin-left: 15px;
 }
 .signup .signup-form .university{

@@ -63,9 +63,6 @@ class Membership(models.Model):
 
 
 
-
-
-
 #a discussion board with a topic and which members of the group can add posts to
 # https://simpleisbetterthancomplex.com/series/2017/09/11/a-complete-beginners-guide-to-django-part-2.html 
     # changed names from tutorial (board->group; topic->board)

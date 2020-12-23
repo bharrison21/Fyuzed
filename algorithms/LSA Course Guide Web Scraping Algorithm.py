@@ -65,7 +65,7 @@ for subject in subjects:
     
     for table in tables:
         try:
-            title=table.find("b").getText(strip=True)
+            title = table.find("b").getText(strip=True)
             course_info = " ".join(table.find("i").text.split())
             description = table.find("p").getText(strip=True)
             urls = [f"{a.text.strip()} - {a['href']}" for a in table.find_all("a")]

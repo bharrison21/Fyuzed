@@ -1,17 +1,18 @@
 {% extends 'base.html' %}
 
 
-{% load static %}
-
-
 {% block title %}Search Page{% endblock %}
 {% block content %}
 
-<img src="{% static 'student_app/search/example.jpeg' %}" alt="My image">
 
 <form action="{% url 'search' %}" method="GET">
     <input name="query" type="text" placeholder="Search...">
     <input type="submit" value="Search">
+
+    {% load static %}
+    <img src="{% static 'student_app/search/example.jpeg' %}" alt="My image" width=25 height=25>
+
+
     <br>
     <input name="category" type="radio" value='users'/>Users
     <input name="category" type="radio" value='groups'/>Groups

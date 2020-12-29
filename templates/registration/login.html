@@ -1,12 +1,32 @@
-{% extends 'base.html' %}
-
-{% block title %}Login{% endblock %}
-
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Login{% endblock %}</title>
+    <meta name="viewport" content="width=devide-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type = "text/css" href="{% static 'css/login.css' %}">
 {% block content %}
-<h2>Login</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Login</button>
-</form>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="title">Login Form</div>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="content">
+          <div class="checkbox">
+            <input type="checkbox" id="remember-me">
+            <label for="remember-me">Remember me</label>
+          </div>
+      <div class="pass-link">
+        <a href="#">Forgot password?</a></div>
+      </div>
+      <div class="field">
+        <input type="submit" value="Login">
+      </div>
+      <div class="signup-link">
+        Not a member? <a href="{% url 'signup' %}">Signup now</a></div>
+  </body>
+
 {% endblock %}

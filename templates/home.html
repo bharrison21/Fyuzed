@@ -1,17 +1,41 @@
-{% extends 'base.html' %}
-
-{% block title %}Home{% endblock %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Home{% endblock %}</title>
+    <meta name="viewport" content="width=devide-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type = "text/css" href="{% static 'css/home.css' %}">
+    <script src="https://kit.fontawesome.com/b7ea88552d.js" crossorigin="anonymous"></script>
+  </head>
 
 {% block content %}
 {% csrf_token %}
 {% if user.is_authenticated %}
+<div class="signin">
   <h3>Hi {{ user.username }}!</h3>
   <p><a href="{% url 'userlist' %}">List of all registered users</a></p>
   <p><a href="{% url 'profile' user.slug %}">Profile page</a></p>
   <p><a href="{% url 'grouphome' %}">Groups</a></p>
+</div>
 {% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">login</a> |
-  <a href="{% url 'signup' %}">signup</a>
+<div class="landing">
+  <div class="logo_container">
+    <img class="Masthead" src="{% static '/images/Fyuzedlg.png' %}" alt="masthead">
+  </div>
+  <div class="field">
+    <div class="login">
+      <button>
+        <a href="{% url 'login' %}">login</a>
+      </button>
+    </div>
+    <div class="signup">
+      <button>
+        <a href="{% url 'signup' %}">signup</a>
+      </button>
+    </div>
+  </div>
+</div>
 {% endif %}
 {% endblock %}
+</body>

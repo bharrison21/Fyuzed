@@ -60,6 +60,7 @@ def login_view(request):
                 login(request, user)
                 return redirect('/')
             else:
+                #ideally this would prepoulate the registration form with the given username and password
                 return redirect('/users/signup')
     else:
         form = LoginForm

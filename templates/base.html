@@ -19,6 +19,7 @@
       {% if user.is_authenticated %}
       <li><a href="{% url 'grouphome' %}">Social</a></li>
       <li><a href="{% url 'courses_home' %}">Courses</a></li>
+      <li><a href="#">Professional</a></li>
       <li><a href="{% url 'profile' user.slug %}">Profile</a></li>
       <li><a href="{% url 'search' %}">Search</a></li>
       {% endif %}

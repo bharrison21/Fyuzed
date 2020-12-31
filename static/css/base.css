@@ -65,12 +65,12 @@ nav ul{
   nav ul li a{
     font-size: 16px;
   }
-@media (max-width: 858px){
+@media (max-width: 1066px){
   .checkbtn{
     display: block;
-    margin-left: 75%;
+    margin-left: 95%;
   }
-  ul{
+  .nav-menu{
     position: fixed;
     width: 100%;
     height: 100vh;
@@ -78,19 +78,19 @@ nav ul{
     top: 80px;
     left: -100%;
     text-align: center;
-    justify-content: center;
     transition: all .5s;
   }
   nav ul li{
     display: block;
     margin: 60px 0;
     line-height: 30px;
-    margin-right: 50%;
+    margin-right: 60%;
     text-align: center;
     justify-content: center;
   }
   nav ul li a{
     font-size: 20px;
+    margin-left: -50%;
   }
   a:hover{
     background: none;
@@ -100,9 +100,5 @@ nav ul{
     left: 0;
   }
 }
-section{
-  background: url(bg1.jpg) no-repeat;
-  background-size: cover;
-  height: calc(100vh - 80px);
-}
+
 

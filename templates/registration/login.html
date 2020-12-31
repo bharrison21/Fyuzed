@@ -12,8 +12,14 @@
     <div class="wrapper">
       <div class="title">Login Form</div>
       <form method="post">
+
+
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class = "field_wrapper">
+          <p>{{ form.username }}</p>
+          <p>{{ form.password }}</p>
+        </div>
+
         <div class="content">
           <div class="checkbox">
             <input type="checkbox" id="remember-me">

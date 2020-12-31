@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.views.generic import ListView, DetailView
 
+from django.utils.text import slugify
 
 # Create your views here.
 @login_required
@@ -52,6 +53,7 @@ def create_listing(request):
 class Listings(LoginRequiredMixin, ListView):
     model = Listing
     template_name = "courses/listings.html"
+
 
 
 class ViewListing(LoginRequiredMixin, DetailView):

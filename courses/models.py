@@ -1,14 +1,24 @@
 from django.db import models
+from django.utils.text import slugify
+import uuid
+
 
 # == Both of these models need a slug or pk == 
 
 
 
 class Listing(models.Model):
-    name = models.CharField(max_length = 400)
+    name = models.CharField(max_length = 400, unique=True, default=uuid.uuid1)
     info = models.CharField(max_length = 400)
 
+    slug = models.SlugField(unique=True, default=uuid.uuid1)
 
+
+    def save(self, *args, **kwargs):
+        #slugify gets rid of spaces, makes it all lowercase, etc.
+        self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+    
     def __str__(self):
         return str(self.name)
 

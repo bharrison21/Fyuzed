@@ -1,9 +1,10 @@
 from django.urls import reverse_lazy, reverse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
+from django.views import View
 from django.http import HttpResponse
 
-from .forms import CustomUserCreationForm, CustomUserChangeForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm, LoginForm
 from .models import CustomUser
 
 from django.contrib.auth import logout, authenticate, login
@@ -33,6 +34,38 @@ class SignUpView(CreateView):
         return to_return    
 
 
+# class LoginView(View):
+#     form_class = LoginForm
+#     success_url = reverse_lazy('home')
+#     template_name = 'registration/login.html'
+
+#     def form_valid(self, form):
+#         to_return = super().form_valid(form)
+#         user = authenticate(
+#             username=form.cleaned_data["username"],
+#             password=form.cleaned_data["password1"],
+#         )
+#         login(self.request, user)
+#         return to_return   
+
+
+def login_view(request):
+    if request.method == 'POST':
+        form = LoginForm(request=request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('/')
+            else:
+                return redirect('/users/signup')
+    else:
+        form = LoginForm
+        return render(request = request,
+                        template_name = "registration/login.html",
+                        context={"form":form})
 
 
 class DeleteAccount(LoginRequiredMixin, DeleteView):

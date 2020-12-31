@@ -3,6 +3,22 @@
 {% block title %}View Listing{% endblock %}
 
 {% block content %}
-<h2>View Listing</h2>
+<h2>Listing</h2>
+<div>
+    <p>Listing name: {{ listing.name }}</p>
+    <p>Listing info: {{ listing.info }}</p>
+
+    <br>
+    <h5>Courses:</h5>
+    {% for course in listing.course_set.all %}
+        <ul>
+            <li style="font-weight: bold;">Name: {{ course.title }}</li>
+            <li>Info: {{ course.info }}</li>
+            <li>Description: {{ course.desc }}</li>
+            <li>Urls: {{ course.urls }}</li>
+        </ul>
+    {% endfor %}
+</div>
+
 
 {% endblock %}

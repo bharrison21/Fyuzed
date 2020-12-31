@@ -19,7 +19,7 @@ class Group(models.Model):
     description = models.CharField(max_length=200)
     # assigns this at the time of the model's creation
     created_at = models.DateTimeField(auto_now=True)
-    created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='group_creator', default=0)
+    created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='group_creator', null=True)
     
     slug = models.SlugField(unique=True, default="group_outdated")
 
@@ -48,8 +48,8 @@ class Group(models.Model):
 #intermediate model to manage the relationship between users and the members list of a group
 #   https://docs.djangoproject.com/en/3.0/topics/db/models/#extra-fields-on-many-to-many-relationships 
 class Membership(models.Model):
-    person = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    person = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null = True)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, null = True)
     date_joined = models.DateField(auto_now=True)
     # invite_reason = models.CharField(max_length=64)
 
@@ -72,8 +72,8 @@ class Board(models.Model):
     
     last_updated = models.DateTimeField(auto_now_add=True)
 
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
-    starter = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, null=True)
+    starter = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True)
 
 
 
@@ -91,7 +91,7 @@ class Post(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null=True)
-    created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="post_creator")
+    created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="post_creator", null=True)
 #this would make it so you can 'post' as a reply to another post, and not only to the main board
     # post = models.ForeignKey(Post, on_delete=models.CASCADE)
 

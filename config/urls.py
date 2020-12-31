@@ -26,13 +26,13 @@ urlpatterns = [
     #extends to groups/urls.py
     path('group/', include('group.urls')),
     path('group/', include('django.contrib.auth.urls')),
-    #extends to users/urls.py
-    path('users/', include('users.urls')),
-    path('users/', include('django.contrib.auth.urls')),
     #extends to search/urls.py
     path('search/', include('search.urls')),
     path('search/', include('django.contrib.auth.urls')),
     #extends to courses/urls.py
     path('courses/', include('courses.urls')),
     path('courses/', include('django.contrib.auth.urls')),
+    #extends to users/urls.py
+    path('users/', include('users.urls')),
+    path('users/', include('django.contrib.auth.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -18,5 +18,5 @@ urlpatterns = [
 
     path('friendsuggestions/', views.get_friend_suggestions, name='friendsuggestions'),
 
-    
+    path('login/', views.login_view, name='login')
 ]

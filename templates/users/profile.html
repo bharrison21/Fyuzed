@@ -1,23 +1,34 @@
 {% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}Profile{% endblock %}</title>
+    <meta name="viewport" content="width=devide-width, initial-scale=1.0">
+    {% block extrahead %}
+    <link rel="stylesheet" type = "text/css" href="{% static 'css/profile.css' %}">
+    {% endblock %}
+  </head>
 
-{% block title %}Profile{% endblock %}
 
 {% block content %}
 {% csrf_token %}
-    <h2> {{ object.username }}'s Profile Page</h2>
-
-    <div>
-        <p>Username: {{ object.username }}</p>
-        <p>Email: {{ object.email }}</p>
-        <p>Is super user: {{ object.is_superuser }}</p>
-        <p>Is active account: {{ object.is_active }}</p>
+<body>
+    <div class="block">
+        <h2 class="image">image</h2> 
+        <h4 class="username"> Bradley Harrison</h4>
+        <br>
+        <h4 class="academics">Sophomore | SI | Business</h4>
+        <h5 class="campus">PSE | DX |  optiMIZE </h5>
     </div>
 
-    <br>
-    <a href="{% url 'courses_home' %}">Courses Home</a>
+    <h5 class="announce">Screams</h5>
+    <h5>Favorite Courses (all courses button)</h5>
+    <h5>Career Ambition</h5>
 
     <div>
-        <h5>List of groups:</h5>
+        <h5>Groups:</h5>
         <ul>
             {% for group in object.group_set.all %}
             <li><a href="{% url 'viewgroup' group.slug %}">{{ group.name }}</a></li>
@@ -73,7 +84,7 @@
         <p><a href="{% url 'deleteaccount' user.slug %}">Delete Account?</a></p>
 
         {% endif %}
-        <p><a href="{% url 'home' %}">Home</a></p>
+    </body>
     </div>
 
 {% endblock %}

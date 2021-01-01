@@ -15,9 +15,13 @@
 
 
         {% csrf_token %}
-        <div class = "field_wrapper">
-          <p>{{ form.username }}</p>
-          <p>{{ form.password }}</p>
+        <div class="field">
+          {{ form.username }}
+          <label placeholder="Email Address"></label>
+        </div>
+        <div class="field">
+          {{ form.password }}
+          <label placeholder="Password"></label>
         </div>
 
         <div class="content">

@@ -1,40 +1,78 @@
 {% extends 'base.html' %}
-
-{% block title %}View group{% endblock %}
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}View group{% endblock %}</title>
+    <meta name="viewport" content="width=devide-width, initial-scale=1.0">
+    {% block extrahead %}
+    <link rel="stylesheet" type = "text/css" href="{% static 'css/view_group.css' %}">
+    <script src="https://kit.fontawesome.com/b7ea88552d.js" crossorigin="anonymous"></script>
+    {% endblock %}
+  </head>
 
 {% block content %}
-<h2>Group</h2>
-<div>
-    <p>
-        <p style="font-weight: bold;">Group name: {{ group.name }}</p>
-        <p>Description: {{ group.description }}</p>
-        <p>Created at: {{ group.created_at }}</p>
-        <p>Created by: {{ group.created_by }}</p>
-        <p>Slug: {{ group.slug }}</p>
-        <p>Member list: </p>
-        <ul>
-        {% for member in group.members.all %}
-            <li><a href="{% url 'profile' member.slug %}">{{ member }}</a></li>
-        {% endfor %}
-        </ul>
-    </p>
+
+<div class="group-header">
+    <img>
+        <h3 class="title">
+            {{ group.name }}
+        </h3>
+        <p class="Description">{{ group.description }}</p>
+        <p class="tags">#school #econ</p>
 </div>
 
-
-<div>
+<div class="join-leave">
     {% if not user in group.members.all %}
     <form method="POST" action="joingroup" group="{{ group }}">
         {% csrf_token %}
-        <input type='submit' value='join "{{ group.name }}" ?' />
+        <input type='submit' value='Join' />
     </form>
     {% endif %}
-    
-    {% if user in group.members.all %}
-    <form method="POST" action="leavegroup" group="{{ group }}">
-        {% csrf_token %}
-        <input type='submit' value='leave "{{ group.name }}" ?' />
-    </form>
-    {% endif %}
+</div>
+
+
+
+<div class="friendsin">
+    <p>Friends in {{ group.name }}:</p>
+</div>
+<div class="members">
+<p>Members: </p>
+<ul>
+{% for member in group.members.all %}
+    <li><a href="{% url 'profile' member.slug %}">{{ member }}</a></li>
+{% endfor %}
+</ul>
+</div>
+
+<br>
+<br>
+<br>
+
+<a href="{% url 'createboard' group.slug %}">
+    <div class="create-board">
+        {% if user in group.members.all %}
+            
+                <i class="far fa-edit"></i>
+                Start a conversation
+        {% endif %}
+    </div>
+</a>
+
+
+{% for board in group.board_set.all %}
+    <ul>
+        <li> {{ board }} -- <a href="{% url 'viewboard' group.slug board.id %}">View Board</a></li>
+    </ul>
+{% endfor %}
+
+{% if user in group.members.all %}
+<form method="POST" action="leavegroup" group="{{ group }}">
+    {% csrf_token %}
+    <input type='submit' value='leave' />
+</form>
+
+<div>
+
 
     {% if group.created_by == user and user in group.members.all %}
     <form method="POST" action="deletegroup" group="{{ group }}">
@@ -43,24 +81,6 @@
     </form>
     {% endif %}
 </div>
-
-<p><a href="{% url 'grouphome' %}">Group Home</a></p>
-
-<br>
-
-
-<h3>Boards</h3>
-
-{% if user in group.members.all %}
-<p><a href="{% url 'createboard' group.slug %}">Create Board</a></p>
-{% else %}
-    <p>Join group to create boards</p>
 {% endif %}
-
-{% for board in group.board_set.all %}
-    <ul>
-        <li> {{ board }} -- <a href="{% url 'viewboard' group.slug board.id %}">View Board</a></li>
-    </ul>
-{% endfor %}
 
 {% endblock %}

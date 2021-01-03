@@ -7,8 +7,7 @@
     <div>
         <h3> <u>Topic:</u> {{ board.topic}} </h3>
         <p> <u>Description:</u> {{ board.description }} </p>
-        <p> <u>Last updated:</u> {{ board.last_updated }} </p>
-        <p> <u>Starter:</u> {{ board.starter }} </p>
+        <p> <u>Boss:</u> {{ board.starter }} </p>
         <p> <a href="{% url 'viewgroup' board.group.slug %}">Group</a></p>
     </div>
 

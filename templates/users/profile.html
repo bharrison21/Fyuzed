@@ -18,29 +18,56 @@
     <div class="block">
         <h2 class="image">image</h2> 
         <h4 class="username"> Bradley Harrison</h4>
+        <h5 class="friends">Friends</h5>
+        {% for friend in object.friends.all %}
+            <!-- show friends list -->
+            <li><a href="{% url 'profile' friend.slug %}">{{ friend }}</a></li>
+        {% endfor %}
+        <h5 class="groups">Groups</h5>
+        <br>
         <br>
         <h4 class="academics">Sophomore | SI | Business</h4>
         <h5 class="campus">PSE | DX |  optiMIZE </h5>
     </div>
 
-    <h5 class="announce">Screams</h5>
-    <h5>Favorite Courses (all courses button)</h5>
-    <h5>Career Ambition</h5>
-
-    <div>
-        <h5>Groups:</h5>
+    <div class="post-container">
+        <h5 class="announce">
+            <p>Posts</p>
+        </h5>
+    </div>
+    <br>
+    <div class="group-container">
+        <h5 class="Groups">
+            Groups (number of groups)):</h5>
         <ul>
             {% for group in object.group_set.all %}
             <li><a href="{% url 'viewgroup' group.slug %}">{{ group.name }}</a></li>
             {% endfor %}
         </ul>
-
-        <h5>Friends</h5>
-            {% for friend in object.friends.all %}
-                <!-- show friends list -->
-                <li><a href="{% url 'profile' friend.slug %}">{{ friend }}</a></li>
-            {% endfor %}
     </div>
+    <div class="course-container">
+        <h5 class="Course">
+            Favorite Courses (all courses button)
+        </h5>
+    </div>
+    <div class="campus-container">
+        <h5 class="Campus">
+            Campus Gems
+        </h5>
+        <p>#86 at Maize and Blue</p>
+        <p>Studying in the Law Quad</p>
+    </div>
+    <div class="career-container">
+        <h5 class="Career">
+            Career Interests
+        </h5>
+        <p>Investment Banking</p>
+        <p>Marketing</p>
+    </div>
+    </div>
+
+
+ 
 
     <br>
 

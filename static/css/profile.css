@@ -10,6 +10,8 @@ html, body {
     height: 25%;
     border-radius: 5px;
     float: left;
+    border: black dashed;
+    margin-top: -5%;
 }
 .image {
     background: lightblue;
@@ -26,6 +28,16 @@ html, body {
     text-align: center;
     font-size: 22px;
 }
+.friends{
+    float: left;
+    margin-left: 17%;
+    margin-top: 2%;
+}
+.groups{
+float: left;
+margin-left: 20%;
+margin-top: 2%;
+}
 .academics{
     text-align: center;
     margin: 0;
@@ -35,7 +47,56 @@ html, body {
     margin: 2%;
 }
 
+.post-container{
+    width: 20%;
+    height: 40%;
+    margin: auto;
+    margin-top: 5%;
+    border: black dashed;
+    
+}
 .announce {
     text-align: center;
     margin-top: 0;
+
+}
+.Course{
+    text-align: center;
+}
+.course-container{
+    width: 20%;
+    height: 40%;
+    margin: auto;
+    margin-top: 5%;
+    border: black dashed;
+}
+.career-container{
+    width: 20%;
+    height: 40%;
+    margin: auto;
+    margin-top: 5%;
+    border: black dashed;
+}
+.Career{
+    text-align: center;
+}
+.group-container{
+    width: 20%;
+    height: 40%;
+    margin: auto;
+    margin-top: 5%;
+    border: black dashed;
+}
+.Groups{
+    text-align: center;
+}
+.campus-container{
+    width: 20%;
+    height: 40%;
+    margin: auto;
+    margin-top: 5%;
+    border: black dashed;
+}
+.Campus{
+    text-align: center;
 }

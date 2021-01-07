@@ -31,17 +31,18 @@
 </div>
 
 
-
+<!--Count number of friends in this group, on click show list-->
 <div class="friendsin">
-    <p>Friends in {{ group.name }}:</p>
+    <p>Friends in {{ group.name }}: 
+        <a href="#">23</a>
+    </p>
 </div>
 <div class="members">
-<p>Members: </p>
-<ul>
+<p>Members: 11.4k</p>
+<!--Count number of members instead of show them but on click show the users in a list-->
 {% for member in group.members.all %}
-    <li><a href="{% url 'profile' member.slug %}">{{ member }}</a></li>
+<p>{{members.count}}</p>
 {% endfor %}
-</ul>
 </div>
 
 <br>
@@ -49,21 +50,36 @@
 <br>
 
 <a href="{% url 'createboard' group.slug %}">
-    <div class="create-board">
-        {% if user in group.members.all %}
-            
+    <div class="create-board">        
                 <i class="far fa-edit"></i>
                 Start a conversation
-        {% endif %}
     </div>
 </a>
+<div class="sorting">
+    <ul class="sorting-icons">
+        <i class="fas fa-chart-line">
+            trending
+        </i>
 
+        <i class="fas fa-fire">
+            popular
+        </i>
 
-{% for board in group.board_set.all %}
-    <ul>
-        <li> {{ board }} -- <a href="{% url 'viewboard' group.slug board.id %}">View Board</a></li>
+        <i class="fas fa-sort">
+            recent
+        </i>
     </ul>
-{% endfor %}
+</div>
+
+
+    {% for board in group.board_set.all %}
+    <ul>
+        <div class="conversations-container">
+            <li> {{ board }} -- <a href="{% url 'viewboard' group.slug board.id %}">View Board</a></li>
+        </div>
+    </ul>
+    {% endfor %}
+
 
 {% if user in group.members.all %}
 <form method="POST" action="leavegroup" group="{{ group }}">

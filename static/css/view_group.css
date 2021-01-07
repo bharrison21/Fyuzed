@@ -3,7 +3,7 @@
 }
 
 html, body {
-    height: 100%;
+    max-height: 100%;
     background-color: #fafafa;
 }
 .group-header{
@@ -30,14 +30,16 @@ html, body {
 }
 
 .join-leave input[type="submit" i]{
-    color: black;
-    background-color: #fff;
-    border: 2px solid black;
+    color: #fff;
+    border: none;
+    background-color: #4158d0;
+    border-radius: 50px;
     margin-top: .4%;
     font-size: 16px;
     font-weight: 500;
-    padding: 2px;
+    padding: 8px;
     cursor: pointer;
+    outline:none;
 }
 .join-leave{
     text-align: center;
@@ -76,4 +78,46 @@ html, body {
 .create-board:hover{
     background-color: rgb(207, 207, 207);
     transition: .3s ease;
+}
+
+.sorting{
+    position: relative;
+    display: flex;
+    color: black;
+    border: 2px solid rgb(190, 190, 190);
+    width: 43%;
+    height: 8%;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px;
+    margin: auto;
+    margin-top: .7%;
+    background-color: rgb(255, 255, 255);
+}
+.sorting-icons i{
+    margin-left: 14px;
+}
+.sorting-icons i:hover{
+    background-color: rgb(207, 207, 207);
+    transition: .3s ease;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 25px;
+}
+.convos{
+    margin: auto;
+    margin-top: 2%;
+    height: 1100px;
+    width: 50%;
+    border: 2px solid rgb(190, 190, 190);
+    overflow-y: hidden;
+}
+.conversations-container{
+    margin: auto;
+    text-align: center;
+    margin-top: 2%;
+    border: 2px solid rgb(190, 190, 190);
+    width: 45%;
+    height: 100px;
 }

@@ -70,6 +70,13 @@ margin-top: 2%;
     margin-top: 5%;
     border: black dashed;
 }
+.schedule-container{
+    width: 20%;
+    height: 40%;
+    margin: auto;
+    margin-top: 5%;
+    border: black dashed;
+}
 .career-container{
     width: 20%;
     height: 40%;

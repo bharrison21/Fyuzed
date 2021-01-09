@@ -32,29 +32,32 @@
 
 
 <!--Count number of friends in this group, on click show list-->
-<div class="friendsin">
+<div class="memberinfo">
+    <p>Members: 11.4k</p>
+    <!--Count number of members instead of show them but on click show the users in a list-->
+    {% for member in group.members.all %}
+    <p>{{members.count}}</p>
+    {% endfor %}
     <p>Friends in {{ group.name }}: 
         <a href="#">23</a>
     </p>
 </div>
-<div class="members">
-<p>Members: 11.4k</p>
-<!--Count number of members instead of show them but on click show the users in a list-->
-{% for member in group.members.all %}
-<p>{{members.count}}</p>
-{% endfor %}
+
+<br>
+<br>
+<br>
+
+<div class="create-board">
+    <a href="{% url 'createboard' group.slug %}">
+        <div class="board">        
+                    <i class="far fa-edit"></i>
+                    Start a conversation
+        </div>
+    </a>
 </div>
 
-<br>
-<br>
-<br>
 
-<a href="{% url 'createboard' group.slug %}">
-    <div class="create-board">        
-                <i class="far fa-edit"></i>
-                Start a conversation
-    </div>
-</a>
+
 <div class="sorting">
     <ul class="sorting-icons">
         <i class="fas fa-chart-line">

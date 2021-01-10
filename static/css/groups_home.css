@@ -1,6 +1,37 @@
-p{
+p {
     text-align: center;
     margin: auto;
     margin-top: 10%;
     font-size: 29px;
+}
+
+.modal-background {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    top: 0px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.modal-content {
+    width: 500px;
+    height: 300px;
+    background-color: white;
+    border-radius: 4px;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top:5px;
+    right:14px;
+    font-size:25px;
+    transform: rotate(45deg); /* will make it look like x */
+    cursor: pointer;
 }

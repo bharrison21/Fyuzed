@@ -3,17 +3,31 @@
 <head>
     <meta charset="utf-8">
     <title>{% block title %}Group Home{% endblock %}</title>
-    <meta name="viewport" content="width=devide-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block extrahead %}
     <link rel="stylesheet" type = "text/css" href="{% static 'css/groups_home.css' %}">
+    <script type = "text/javascript" src="{% static 'js/groups_home.js' %}"></script>
     {% endblock %}
-  </head>
+</head>
 
 {% block content %}
 <p><a href="{% url 'grouplist' %}">List of groups</a></p>
-<p><a href="{% url 'creategroup' %}">Create a group</a></p>
+
+<button name="create_group" id='button'>Create Group</button>
+
+<div class="modal-background">
+  <div class="modal-content">
+    <div class="close">+</div>
+    <h4>Create Group</h4>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <br><br>
+      <button type="submit", value="Create">Submit</button>
+    </form>
+  </div>
+</div>
 
 
+<!-- <p><a href="{% url 'creategroup' %}">Create a group</a></p> -->
 {% endblock %}
-
-    

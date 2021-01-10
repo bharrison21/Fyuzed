@@ -6,8 +6,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.http import HttpResponse
 
-from django.views.generic import ListView, DetailView, UpdateView
+from django.views.generic import ListView, DetailView, UpdateView, TemplateView
 from django.views.generic.edit import CreateView
+from django.views.generic.base import View
 
 from .models import Group, Membership, Board, Post
 from .forms import GroupCreationForm, BoardCreationForm, PostCreationForm, BoardUpdateForm
@@ -31,6 +32,18 @@ class CreateGroup(LoginRequiredMixin, CreateView):
         #need to add the creator to the members list
         return super(CreateGroup, self).form_valid(form)
 
+
+class GroupsHome(LoginRequiredMixin, View):
+    
+    def get(self, request, *args, **kwargs):
+        context = {'form': GroupCreationForm}
+        return render(request, "groups/groups_home.html", context=context)
+    def post(self, request, *args, **kwargs):
+        context = {'form': GroupCreationForm}
+        create_group(request)
+        return render(request, "groups/groups_home.html", context=context)
+
+
 @login_required
 def create_group(request):
     if request.method == "POST":
@@ -44,7 +57,7 @@ def create_group(request):
     
         return redirect('viewgroup', the_slug = group.slug)
     else:
-        return render(request, 'groups/create_group.html', {'form': GroupCreationForm})
+        return render(request, 'groups/grouphome.html', {'form': GroupCreationForm})
 
 
 

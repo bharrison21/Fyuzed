@@ -79,6 +79,7 @@ class ViewGroup(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         # self.request.session.set['cur_group'] = Group.objects.get_object_or_404(Group, slug = slug_field)
         context = super().get_context_data(**kwargs)
+        context['form'] = BoardCreationForm
         return context
 
 

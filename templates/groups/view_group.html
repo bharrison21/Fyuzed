@@ -60,7 +60,7 @@
     <div class="modal-content">
       <div class="close">+</div>
       <h4>Start a Conversation</h4>
-      <form method="post">
+      <form method="POST" action = "{% url 'createboard' group.slug %}">
         {% csrf_token %}
         {{ form.as_p }}
         <br><br>

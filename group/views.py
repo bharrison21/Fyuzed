@@ -82,6 +82,11 @@ class ViewGroup(LoginRequiredMixin, DetailView):
         context['form'] = BoardCreationForm
         return context
 
+    # def post(self, request, *args, **kwargs):
+    #     the_slug = kwargs['the_slug']
+    #     create_board(request, the_slug)
+    #     return redirect('viewgroup', slug = the_slug)
+
 
 @login_required
 def delete_group(request, the_slug):
@@ -152,8 +157,7 @@ def create_board(request, the_slug):
             'slug': the_slug,
             'form': BoardCreationForm,
         }
-
-        return render(request, 'groups/create_board.html', context)
+        return redirect('viewgroup', context, the_slug=the_slug)
     
 
 

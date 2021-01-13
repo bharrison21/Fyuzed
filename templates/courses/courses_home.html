@@ -6,4 +6,7 @@
 <p><h4><a href="{% url 'create_course' %}">Create Course</a></h4></p>
 <p><h4><a href="{% url 'create_listing' %}">Create Listing</a></h4></p>
 <p><h4><a href="{% url 'listings' %}">List of Listings</a></h4></p>
+{% if user.is_superuser == True %}
+    <p><a href="{% url 'fill_listing' %}">Create actual listing</a></p>
+{% endif %}
 {% endblock %}

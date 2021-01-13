@@ -14,6 +14,8 @@ urlpatterns = [
     path('create_course/', views.create_course, name="create_course"),
     path('create_listing/', views.create_listing, name="create_listing"),
     path('listings/', Listings.as_view(), name="listings"),
-    path('<slug:the_slug>/view_listing/', ViewListing.as_view(), name="view_listing")
+    path('<slug:the_slug>/view_listing/', ViewListing.as_view(), name="view_listing"),
+
+    path('fill_listing/', views.fill_listing, name="fill_listing")
 
 ]
